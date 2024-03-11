@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1>Adicionar comentário</h1>
+    <form action="{% url 'destino_comentario_create' destino.id %}" method="post"> {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="comentario_texto">Comentário:</label>
+            <textarea class="form-control" id="comentario_texto" name="comentario_texto" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="comentario_nota">Nota:</label>
+            <input type="number" class="form-control" id="comentario_nota" name="comentario_nota" min="0" max="5">
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+{% endblock %}

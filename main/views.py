@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.views.generic import TemplateView
 from django.contrib.messages import constants
 from django.contrib import messages, auth
-# from destinos.models import Comentario
+from destinos.models import Comentario
 
 
 class HomeView(TemplateView):
@@ -61,9 +61,9 @@ def logout(request):
     return redirect("home")
 
 
-# def perfil(request, user_id):
-#     comentarios = (
-#         Comentario.objects.all().filter(usuario__id=user_id).order_by("-data_criacao")
-#     )
-#     print('comentarios')
-#     return render(request, "perfil.html", {"comentarios": comentarios})
+def perfil(request, user_id):
+    comentarios = (
+        Comentario.objects.all().filter(usuario__id=user_id).order_by("-data_criacao")
+    )
+    print('comentarios')
+    return render(request, "perfil.html", {"comentarios": comentarios})

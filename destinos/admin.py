@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import LugarTuristico,Comentario
+
+admin.site.register(LugarTuristico)
+
+admin.site.register(Comentario)

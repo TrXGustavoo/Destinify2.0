@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'cabecalho' %}
+
+{% endblock 'cabecalho' %}
+
+{% block 'conteudo' %}
+
+            {% if comentarios %}
+                {% for comentario in comentarios %}
+                    <div class="comentario">
+                        <strong>{{ comentario.usuario.username }}</strong> - {{ comentario.data_criacao }}<br>
+                        {{ comentario.texto }}
+                        <br>
+                        <strong>Nota:</strong> {{ comentario.nota }}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Nenhum comentário feito ainda!</p>
+            {% endif %}
+
+{% endblock 'conteudo' %}

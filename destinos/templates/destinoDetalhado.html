@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'cabecalho' %}
+
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+
+
+{% endblock 'cabecalho' %}
+
+{% block 'conteudo' %}
+    <div class="container">
+        <h1>Detalhes do Destino</h1>
+        <div class="card">
+            <img class="card-img-top" src="{{ destino.foto.url }}" alt="{{ destino.nome }}">
+            <div class="card-body">
+                <h2 class="card-title">{{ destino.nome }}</h2>
+                <p class="card-text">
+                    <strong>Localidade:</strong>{{ destino.pais }},  {{ destino.cidade }}<br>
+                    <strong>Descrição:</strong> {{ destino.descricao }}<br>
+                </p>
+            </div>
+        </div>
+        <div class="bloco-abaixo">
+            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+            <strong>Nota:</strong> {{ destino.nota }}<br>
+            <strong>Comentários:</strong><br>
+            {% for comentario in destino.comentarios.all %}
+            - {{ comentario.texto }} - {{ comentario.usuario.username }} - {{ comentario.data_criacao }}<br>
+            {% endfor %}
+            <br>
+            <strong>Adicione um comentário:</strong>
+            <form action="{% url 'destino_comentario_create' destino.id %}" method="POST"> {% csrf_token %}
+                <div class="form-group">
+                    <label for="comentario_texto">Comentário:</label>
+                    <textarea class="form-control" id="comentario_texto" name="comentario_texto" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="comentario_nota">Nota:</label>
+                    <input type="number" class="form-control" id="comentario_nota" name="comentario_nota" min="0" max="5">
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+            {% if comentarios %}
+                {% for comentario in comentarios %}
+                    <div class="comentario">
+                        <strong>{{ comentario.usuario.username }}</strong> - {{ comentario.data_criacao }}<br>
+                        {{ comentario.texto }}
+                        <br>
+                        <strong>Nota:</strong> {{ comentario.nota }}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Nenhum comentário encontrado para este destino.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock 'conteudo' %}
