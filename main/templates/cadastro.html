@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'cabecalho' %}
+  <link rel="stylesheet" href="{% static 'geral/css/cadastro.css' %}">
+{% endblock %}
+
+{% block 'conteudo' %}
+
+  {% if messages %}
+  {% for message in messages %}
+      <section class="alert {{message.tags}}">{{message}}</section>
+  {% endfor %}
+  {% endif %}
+  <form action="{% url 'cadastro' %}" method="POST"> {% csrf_token %}
+    <div class="mb-3">
+      <label for="username" class="form-label">Nome de usuario</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Usuario">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Usuario">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Senha</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" name="senha" placeholder="Senha">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword2" class="form-label">Confirmar senha</label>
+      <input type="password" class="form-control" id="exampleInputPassword2" name="confirmar_senha">
+    </div>
+    <button type="submit" class="btn btn-cadastro">Enviar</button>
+  </form>
+{% endblock %}

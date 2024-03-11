@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'cabecalho' %}
+{% endblock 'cabecalho' %}
+
+{% block 'conteudo' %}
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="username" class="form-label">Nome de usuario</label>
+            <input type="text" name="username" placeholder="Usuario" class="form-control">          
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="senha" placeholder="Senha">
+          </div>
+        <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+{% endblock 'conteudo' %}

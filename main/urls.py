@@ -9,6 +9,6 @@ urlpatterns = [
     path('accounts/cadastro', views.cadastro, name='cadastro'),
     path('accounts/login', views.login, name='login'),
     path('accounts/logout', views.logout, name='logout'),
-    path('perfil/<int:user_id>/', views.perfil, name='perfil'),
+    # path('perfil/<int:user_id>/', views.perfil, name='perfil'),
 
 ]

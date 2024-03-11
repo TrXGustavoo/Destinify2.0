@@ -15,7 +15,7 @@
         <li><a href="{% url 'home' %}" class="menu-logo"><img src="{% static 'geral/img/logoo.png' %}" /></a></li>
         <li><a class='dropdown-arrow' href='http://'>Products</a>
           <ul class='sub-menus'>
-            <li><a href="{% url 'destinos' %}">Destinos</a></li>
+            {% comment %} <li><a href="{% url 'destinos' %}">Destinos</a></li> {% endcomment %}
             <li><a href='http://'>Products 2</a></li>
             <li><a href='http://'>Products 3</a></li>
             <li><a href='http://'>Products 4</a></li>
@@ -28,7 +28,7 @@
             <a href="{% url 'cadastro' %}">Registrar</a>
           {% endif %}
           {% if user.is_authenticated %}
-            <a href="{% url 'perfil' user.id %}">Meu perfil</a>
+            {% comment %} <a href="{% url 'perfil' user.id %}">Meu perfil</a> {% endcomment %}
           {% endif %}
         </li>
         <li>
