@@ -1,0 +1,106 @@
+#menu {
+	background: #001F3F;
+	height: 76px;
+	padding-left: 18px;
+	border-radius: 0px;
+}
+
+.menu-logo {
+    line-height: 0;
+    margin: 0 20px;
+}
+
+.menu-logo img {
+    max-height: 50px;
+    max-width: 100px;
+    flex-shrink: 0;
+}
+
+#menu ul, #menu li {
+	margin: 0 auto;
+	padding: 0;
+	list-style: none
+}
+#menu ul {
+	width: 100%;
+	text-align: left;
+}
+#menu li {
+	display: inline-block;
+	position: relative;
+}
+#menu a {
+	display: block;
+	line-height: 76px;
+	padding: 0 14px;
+	text-decoration: none;
+	color: #FF851B;
+	font-size: 22px;
+}
+#menu a.dropdown-arrow:after {
+	content: "\25BE";
+	margin-left: 5px;
+}
+#menu li a:hover {
+	color: #7F8C8D;
+	background: #001F3F;
+}
+#menu input {
+	display: none;
+	margin: 0;
+	padding: 0;
+	height: 76px;
+	width: 100%;
+	opacity: 0;
+	cursor: pointer
+}
+#menu label {
+	display: none;
+	line-height: 76px;
+	text-align: center;
+	position: absolute;
+	left: 35px
+}
+#menu label:before {
+	font-size: 1.6em;
+	color: #FF851B;
+	content: "\2261"; 
+	margin-left: 20px;
+}
+#menu ul.sub-menus{
+	height: auto;
+	overflow: hidden;
+	width: 170px;
+	background: #001F3F;
+	position: absolute;
+	z-index: 99;
+	display: none;
+}
+#menu ul.sub-menus li {
+	display: block;
+	text-align: left;
+	width: 100%;
+}
+#menu ul.sub-menus a {
+	color: #FF851B;
+	font-size: 18px;
+}
+#menu li:hover ul.sub-menus {
+	display: block
+}
+#menu ul.sub-menus a:hover{
+	background: #001F3F;
+	color: #7F8C8D;
+}
+@media screen and (max-width: 800px){
+	#menu {position:relative}
+	#menu ul {background:#001F3F;position:absolute;top:100%;right:0;left:0;z-index:3;height:auto;display:none;text-align:left;}
+	#menu ul.sub-menus {width:100%;position:static;}
+	#menu ul.sub-menus a {padding-left:30px;}
+	#menu li {display:block;float:none;width:auto;}
+	#menu input, #menu label {position:absolute;top:0;left:0;display:block}
+	#menu input {z-index:4}
+	#menu input:checked + label {color:#FF851B}
+	#menu input:checked + label:before {content:"\00d7"}
+	#menu input:checked ~ ul {display:block}
+}
