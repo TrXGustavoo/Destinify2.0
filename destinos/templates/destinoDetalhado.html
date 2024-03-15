@@ -3,8 +3,16 @@
 
 {% block 'cabecalho' %}
 
+    {% comment %} <link rel="stylesheet" href="{% static 'destinos/css/destinoDetalhado.css' %}" /> {% endcomment %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
     <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+
+    <style>
+        .rating li {
+            display: inline-block;
+        }
+    </style>
 
 
 {% endblock 'cabecalho' %}
@@ -25,6 +33,7 @@
         <div class="bloco-abaixo">
             <i class="fa fa-star-half-o" aria-hidden="true"></i>
             <strong>Nota:</strong> {{ destino.nota }}<br>
+            {% comment %} <strong>Rating:</strong> {{ comentario.avarage_rating}}<br> {% endcomment %}
             <strong>Comentários:</strong><br>
             {% for comentario in destino.comentarios.all %}
             - {{ comentario.texto }} - {{ comentario.usuario.username }} - {{ comentario.data_criacao }}<br>
@@ -32,16 +41,82 @@
             <br>
             <strong>Adicione um comentário:</strong>
             <form action="{% url 'destino_comentario_create' destino.id %}" method="POST"> {% csrf_token %}
+                <section>
+                    <div class="container my-5 py-5 text-dark">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-6">
+                        <div class="card">
+                            <div class="card-body p-4">
+                            <div class="d-flex flex-start w-100">
+                                <img class="rounded-circle shadow-1-strong me-3"
+                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp" alt="avatar" width="65"
+                                height="65" />
+                                <div class="w-100">
+                                <h5>Adicione um comentario</h5>
+                                <ul class="rating mb-3" data-mdb-toggle="rating">
+                                    <li>
+                                    <i class="far fa-star fa-sm text-danger" title="Bad"></i>
+                                    </li>
+                                    <li>
+                                    <i class="far fa-star fa-sm text-danger" title="Poor"></i>
+                                    </li>
+                                    <li>
+                                    <i class="far fa-star fa-sm text-danger" title="OK"></i>
+                                    </li>
+                                    <li>
+                                    <i class="far fa-star fa-sm text-danger" title="Good"></i>
+                                    </li>
+                                    <li>
+                                    <i class="far fa-star fa-sm text-danger" title="Excellent"></i>
+                                    </li>
+                                </ul>
+                                
+                                <div class="form-outline">
+                                    <label for="comentario_texto">Comentário:</label>
+                                    <textarea class="form-control" id="comentario_texto" name="comentario_texto" rows="3"></textarea>
+                                </div>
+
+                                <div class="form-outline">
+                                    <label for="comentario_nota">Nota:</label>
+                                    <input type="number" class="form-control" id="comentario_nota" name="comentario_nota" min="0" max="5">
+                                </div>
+
+                                <div class="d-flex justify-content-between mt-3">
+                                    <button type="submit" class="btn btn-danger">
+                                    Postar <i class="fas fa-long-arrow-alt-right ms-1"></i>
+                                    </button>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </section>
+            </form>
+            {% comment %} <form action="{% url 'destino_comentario_create' destino.id %}" method="POST"> {% csrf_token %}
                 <div class="form-group">
                     <label for="comentario_texto">Comentário:</label>
                     <textarea class="form-control" id="comentario_texto" name="comentario_texto" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="comentario_nota">Nota:</label>
-                    <input type="number" class="form-control" id="comentario_nota" name="comentario_nota" min="0" max="5">
+                        <label for="comentario_nota">Nota:</label>
+                        <input type="number" class="form-control" id="comentario_nota" name="comentario_nota" min="0" max="5">
                 </div>
+                <div class="form-group">
+                    <label for="comentario_rating">Rating:</label>
+                    <div class="rating">
+                        <input type="radio" name="rate" id="star-1" value="1" ><label for="star-1"  ></label>
+                        <input type="radio" name="rate" id="star-2" value="2" ><label for="star-2"  ></label>
+                        <input type="radio" name="rate" id="star-3" value="3" ><label for="star-3"  ></label>
+                        <input type="radio" name="rate" id="star-4" value="4" ><label for="star-4"  ></label>
+                        <input type="radio" name="rate" id="star-5" value="5" ><label for="star-5"  ></label>
+                    </div>
+                </div> 
                 <button type="submit" class="btn btn-primary">Enviar</button>
-            </form>
+            </form>  {% endcomment %}
+            Comentários: {{comentarios.count}}
             {% if comentarios %}
                 {% for comentario in comentarios %}
                     <div class="comentario">
@@ -49,6 +124,7 @@
                         {{ comentario.texto }}
                         <br>
                         <strong>Nota:</strong> {{ comentario.nota }}
+                        <strong>Rating:</strong> {{ comentario.rating }}
                     </div>
                 {% endfor %}
             {% else %}

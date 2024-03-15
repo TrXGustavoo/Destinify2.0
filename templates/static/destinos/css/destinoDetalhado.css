@@ -1,0 +1,22 @@
+
+
+.rating input{
+    display: none;
+}
+
+.rating label{
+    display: block;
+    cursor: pointer;
+    width: 50px;
+}
+
+.rating label:before{
+    content: '\f005';
+    font-family: fontAwesome;
+    color: white;
+}
+/* .rating label:after{
+    content: '\f005';
+    font-family: fontAwesome;
+    color: yellow;
+} */

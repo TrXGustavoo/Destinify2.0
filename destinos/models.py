@@ -1,6 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+RATING = (
+    (1, '1'),
+    (2, '2'),
+    (3, '3'),
+    (4, 'QUATOR'),
+    (5, 'CINCO'),
+    
+)
+
 class LugarTuristico(models.Model):
     nome = models.CharField(max_length=255)
     pais = models.CharField(max_length=255)
@@ -9,7 +18,7 @@ class LugarTuristico(models.Model):
     # fotos = models.ManyToManyField('Foto')
     descricao = models.TextField()
     nota = models.DecimalField(max_digits=2, decimal_places=1, null=True, default=0)
-
+    
     comentarios = models.ManyToManyField('Comentario', blank=True)
 
 # class Foto(models.Model):
@@ -22,6 +31,8 @@ class Comentario(models.Model):
     nota = models.DecimalField(max_digits=2, decimal_places=1)
     data_criacao = models.DateTimeField(auto_now_add=True, null=False)
     destinoA = models.IntegerField(blank=True, null=True)
+    # rating = models.IntegerField(choices=RATING, blank=False, default=1)
+    rating = models.IntegerField(default=0)
     
     def __str__(self):
         return self.texto
