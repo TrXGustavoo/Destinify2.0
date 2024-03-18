@@ -3,7 +3,7 @@
 
 {% block 'cabecalho' %}
 
-    {% comment %} <link rel="stylesheet" href="{% static 'destinos/css/destinoDetalhado.css' %}" /> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'destinos/css/destinoDetalhado.css' %}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
     <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
@@ -26,7 +26,6 @@
                 <h2 class="card-title">{{ destino.nome }}</h2>
                 <p class="card-text">
                     <strong>Localidade:</strong>{{ destino.pais }},  {{ destino.cidade }}<br>
-                    <strong>Descrição:</strong> {{ destino.descricao }}<br>
                 </p>
             </div>
         </div>
@@ -34,102 +33,173 @@
             <i class="fa fa-star-half-o" aria-hidden="true"></i>
             <strong>Nota:</strong> {{ destino.nota }}<br>
             {% comment %} <strong>Rating:</strong> {{ comentario.avarage_rating}}<br> {% endcomment %}
-            <strong>Comentários:</strong><br>
-            {% for comentario in destino.comentarios.all %}
-            - {{ comentario.texto }} - {{ comentario.usuario.username }} - {{ comentario.data_criacao }}<br>
-            {% endfor %}
             <br>
-            <strong>Adicione um comentário:</strong>
-            <form action="{% url 'destino_comentario_create' destino.id %}" method="POST"> {% csrf_token %}
-                <section>
-                    <div class="container my-5 py-5 text-dark">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-10 col-lg-8 col-xl-6">
-                        <div class="card">
-                            <div class="card-body p-4">
-                            <div class="d-flex flex-start w-100">
-                                <img class="rounded-circle shadow-1-strong me-3"
-                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp" alt="avatar" width="65"
-                                height="65" />
-                                <div class="w-100">
-                                <h5>Adicione um comentario</h5>
-                                <ul class="rating mb-3" data-mdb-toggle="rating">
-                                    <li>
-                                    <i class="far fa-star fa-sm text-danger" title="Bad"></i>
-                                    </li>
-                                    <li>
-                                    <i class="far fa-star fa-sm text-danger" title="Poor"></i>
-                                    </li>
-                                    <li>
-                                    <i class="far fa-star fa-sm text-danger" title="OK"></i>
-                                    </li>
-                                    <li>
-                                    <i class="far fa-star fa-sm text-danger" title="Good"></i>
-                                    </li>
-                                    <li>
-                                    <i class="far fa-star fa-sm text-danger" title="Excellent"></i>
-                                    </li>
-                                </ul>
-                                
-                                <div class="form-outline">
-                                    <label for="comentario_texto">Comentário:</label>
-                                    <textarea class="form-control" id="comentario_texto" name="comentario_texto" rows="3"></textarea>
-                                </div>
-
-                                <div class="form-outline">
-                                    <label for="comentario_nota">Nota:</label>
-                                    <input type="number" class="form-control" id="comentario_nota" name="comentario_nota" min="0" max="5">
-                                </div>
-
-                                <div class="d-flex justify-content-between mt-3">
-                                    <button type="submit" class="btn btn-danger">
-                                    Postar <i class="fas fa-long-arrow-alt-right ms-1"></i>
-                                    </button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </section>
-            </form>
-            {% comment %} <form action="{% url 'destino_comentario_create' destino.id %}" method="POST"> {% csrf_token %}
-                <div class="form-group">
-                    <label for="comentario_texto">Comentário:</label>
-                    <textarea class="form-control" id="comentario_texto" name="comentario_texto" rows="3"></textarea>
+            
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Descrição</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Comentarios</button>
+                </li>
+            </ul>
+              
+            <div class="tab-content">
+                <div class="tab-pane active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                    <br>
+                    <strong>{{ destino.descricao }}</strong>
                 </div>
-                <div class="form-group">
-                        <label for="comentario_nota">Nota:</label>
-                        <input type="number" class="form-control" id="comentario_nota" name="comentario_nota" min="0" max="5">
+                <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+
+
+                    <div class="parent">
+                        <div class="div1"> 
+                            <section class="w-100">
+                                <strong>Comentários:</strong> {{comentarios.count}}
+                                {% if comentarios %}
+                                    {% for comentario in comentarios %}
+                                        <div class="container my-5 py-5 text-dark">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col-md-11 col-lg-9 col-xl-7 card-comentario">
+                                                    <div class="d-flex flex-start mb-4">
+                                                        <img class="rounded-circle shadow-1-strong me-3"
+                                                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="65"
+                                                        height="65" />
+                                                        <div class="card w-100">
+                                                            <div class="card-body p-4">
+                                                                <div class="">
+                                                                    <strong>{{ comentario.usuario.username }}</strong>
+                                                                    <p class="small"><strong>Nota:{{ comentario.nota }}</strong></p>
+                                                                    <p class="small">
+                                                                        {% comment %} <strong>Rating:{{ comentario.rating }}</strong>  {% endcomment %}
+                                                                        <strong>Rating:
+                                                                            {% if comentario.rating == 3%}
+                                                                                <h1>32323</h1>
+                                                                            {% endif %}
+                                                                        </strong> 
+                                                                    </p>
+                                                                    <p class="small">{{ comentario.data_criacao }}</p>
+                                                                    <p>
+                                                                        {{ comentario.texto }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>Nenhum comentário encontrado para este destino.</p>
+                                {% endif %}  
+                            </section>
+                            
+                            
+                        </div>
+                        <div class="div2"> 
+                            <form action="{% url 'destino_comentario_create' destino.id %}" method="POST"> {%      csrf_token %}
+                                <section>
+                                    <div class="container my-5 py-5 text-dark">
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-md-10 col-lg-8 col-xl-6 card-add-comentario">
+                                                <div class="card">
+                                                    <div class="card-body p-4">
+                                                        <div class="d-flex flex-start w-100">
+                                                            <div class="w-100">
+                                                            <h5>Adicione um comentario</h5>
+                                                            
+                                                            <div class="form-outline">
+                                                                <label for="comentario_texto">Comentário:</label>
+                                                                <textarea class="form-control" id="comentario_texto" name="comentario_texto" rows="3"></textarea>
+                                                            </div>
+                            
+                                                            <div class="form-outline">
+                                                                <label for="comentario_nota">Nota:</label>
+                                                                <input type="number" class="form-control" id="comentario_nota" name="comentario_nota" min="0" max="5">
+                                                            </div>
+
+                                                            <div class="form-outline">
+                                                                <div class="container-wrapper">  
+                                                                    <div class="container d-flex align-items-center justify-content-center">
+                                                                      <div class="row justify-content-center">    
+                                                                        
+                                                                            <!-- star rating -->
+                                                                            <div class="rating-wrapper">
+                                                                            
+                                                                                <!-- star 5 -->
+                                                                                <input type="radio" id="5-star-rating" name="star-rating" value="5">
+                                                                                <label for="5-star-rating" class="star-rating">
+                                                                                    <i class="fas fa-star d-inline-block"></i>
+                                                                                </label>
+                                                                                
+                                                                                <!-- star 4 -->
+                                                                                <input type="radio" id="4-star-rating" name="star-rating" value="4">
+                                                                                <label for="4-star-rating" class="star-rating star">
+                                                                                    <i class="fas fa-star d-inline-block"></i>
+                                                                                </label>
+                                                                                
+                                                                                <!-- star 3 -->
+                                                                                <input type="radio" id="3-star-rating" name="star-rating" value="3">
+                                                                                <label for="3-star-rating" class="star-rating star">
+                                                                                    <i class="fas fa-star d-inline-block"></i>
+                                                                                </label>
+                                                                                
+                                                                                <!-- star 2 -->
+                                                                                <input type="radio" id="2-star-rating" name="star-rating" value="2">
+                                                                                <label for="2-star-rating" class="star-rating star">
+                                                                                    <i class="fas fa-star d-inline-block"></i>
+                                                                                </label>
+                                                                                
+                                                                                <!-- star 1 -->
+                                                                                <input type="radio" id="1-star-rating" name="star-rating" value="1">
+                                                                                <label for="1-star-rating" class="star-rating star">
+                                                                                    <i class="fas fa-star d-inline-block"></i>
+                                                                                </label>
+                                                                            </div>
+                                                                       </div>
+                                                                    </div>
+                                                                </div>                                                                  
+                                                            </div>
+                            
+                                                            <div class="d-flex justify-content-between mt-3">
+                                                                <button type="submit" class="btn btn-danger">
+                                                                Postar <i class="fas fa-long-arrow-alt-right ms-1"></i>
+                                                                </button>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </form>
+                        </div>
+                        <div class="div3"><strong>Nota:</strong> {{ destino.nota }}<br> </div>
+                    </div>
+
+                  
                 </div>
-                <div class="form-group">
-                    <label for="comentario_rating">Rating:</label>
-                    <div class="rating">
-                        <input type="radio" name="rate" id="star-1" value="1" ><label for="star-1"  ></label>
-                        <input type="radio" name="rate" id="star-2" value="2" ><label for="star-2"  ></label>
-                        <input type="radio" name="rate" id="star-3" value="3" ><label for="star-3"  ></label>
-                        <input type="radio" name="rate" id="star-4" value="4" ><label for="star-4"  ></label>
-                        <input type="radio" name="rate" id="star-5" value="5" ><label for="star-5"  ></label>
-                    </div>
-                </div> 
-                <button type="submit" class="btn btn-primary">Enviar</button>
-            </form>  {% endcomment %}
-            Comentários: {{comentarios.count}}
-            {% if comentarios %}
-                {% for comentario in comentarios %}
-                    <div class="comentario">
-                        <strong>{{ comentario.usuario.username }}</strong> - {{ comentario.data_criacao }}<br>
-                        {{ comentario.texto }}
-                        <br>
-                        <strong>Nota:</strong> {{ comentario.nota }}
-                        <strong>Rating:</strong> {{ comentario.rating }}
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>Nenhum comentário encontrado para este destino.</p>
-            {% endif %}
+            </div>
+              
         </div>
     </div>
+
+    <script>
+        const abas = document.querySelectorAll(".aba");
+        const conteudos = document.querySelectorAll(".conteudo");
+
+        abas.forEach((aba)=>{
+            aba.addEventListener("click", ()=>{
+                abas.forEach((aba)=> aba.classList.remove('ativa'));
+                aba.classList.add("ativa")
+
+                conteudos.forEach((conteudo)=> conteudo.style.display = "none");
+                document.querySelector(´#${aba.id.replace("aba","conteudo")}).style.display = "block";
+            });    
+        });
+    </script>
 {% endblock 'conteudo' %}

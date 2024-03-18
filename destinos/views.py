@@ -37,8 +37,6 @@ def destino_detalhe(request, destino_id):
     destino = get_object_or_404(LugarTuristico, pk=destino_id)
     comentarios = Comentario.objects.filter(destinoA=destino_id).order_by('-data_criacao')
     
-    avarage_rating = Comentario.objects.filter(destinoA=destino_id).aaggregate(rating=Avg('rating'))
-    
     soma_notas = 0
     for comentario in comentarios:
         soma_notas += comentario.nota
@@ -57,13 +55,14 @@ def destino_comentario_create(request, destino_id):
     if request.method == 'POST':
         texto = request.POST.get("comentario_texto")
         nota = request.POST.get("comentario_nota")
-        # rating = request.POST.get("comentario_rating")
+        rating = request.POST.get("star-rating")
+        print(rating)
         comentario = Comentario(
             texto = texto,
             nota = nota,
             usuario = request.user,
             destinoA = destino_id,
-            # rating = rating
+            rating = rating
         )
         comentario.save()
         return redirect('destino_detalhe', destino.id)

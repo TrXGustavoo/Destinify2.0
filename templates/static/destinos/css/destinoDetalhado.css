@@ -1,22 +1,109 @@
-
-
-.rating input{
+.rating input {
     display: none;
 }
 
-.rating label{
+.rating label {
     display: block;
     cursor: pointer;
     width: 50px;
 }
 
-.rating label:before{
+.rating label:before {
     content: '\f005';
     font-family: fontAwesome;
     color: white;
 }
+
 /* .rating label:after{
     content: '\f005';
     font-family: fontAwesome;
     color: yellow;
 } */
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.div1 {
+    grid-area: 1 / 1 / 6 / 5;
+}
+
+.div2 {
+    grid-area: 1 / 5 / 6 / 9;
+}
+
+.div3 {
+    grid-area: 1 / 5 / 2 / 9;
+}
+
+.card-comentario {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.card-add-comentario {
+    width: 100% !important;
+}
+
+
+/* .container-wrapper {
+    background-color: #EDF0F9;
+} */
+
+.container {
+    height: auto;
+}
+
+.rating-wrapper {
+    align-self: center;
+    /* box-shadow: 7px 7px 25px rgba(198, 206, 237, .7),
+        -7px -7px 35px rgba(255, 255, 255, .7),
+        inset 0px 0px 4px rgba(255, 255, 255, .9),
+        inset 7px 7px 15px rgba(198, 206, 237, .8); */
+    border-radius: 5rem;
+    display: inline-flex;
+    direction: rtl !important;
+    /* padding: 1.5rem 2.5rem; */
+    margin-left: auto;
+
+
+    label {
+        color: #E1E6F6;
+        cursor: pointer;
+        display: inline-flex;
+        font-size: 3rem;
+        padding: 1rem .6rem;
+        transition: color 0.5s;
+    }
+
+    svg {
+        -webkit-text-fill-color: transparent;
+        -webkit-filter: drop-shadow (4px 1px 6px rgba(198, 206, 237, 1));
+        filter: drop-shadow(5px 1px 3px rgba(198, 206, 237, 1));
+    }
+
+    input {
+        height: 100%;
+        width: 100%;
+    }
+
+    input {
+        display: none;
+    }
+
+    label:hover,
+    label:hover~label,
+    input:checked~label {
+        color: yellow;
+    }
+
+    label:hover,
+    label:hover~label,
+    input:checked~label {
+        color: yellow;
+    }
+}
