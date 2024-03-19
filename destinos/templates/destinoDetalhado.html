@@ -55,11 +55,11 @@
                     <div class="parent">
                         <div class="div1"> 
                             <section class="w-100">
-                                <strong>Comentários:</strong> {{comentarios.count}}
+                                <br><strong>Comentários:</strong> {{comentarios.count}}
                                 {% if comentarios %}
                                     {% for comentario in comentarios %}
-                                        <div class="container my-5 py-5 text-dark">
-                                            <div class="row d-flex justify-content-center">
+                                        <div class="container my-5 py-5 text-dark ">
+                                            <div class="row d-flex justify-content-center ">
                                                 <div class="col-md-11 col-lg-9 col-xl-7 card-comentario">
                                                     <div class="d-flex flex-start mb-4">
                                                         <img class="rounded-circle shadow-1-strong me-3"
@@ -68,20 +68,52 @@
                                                         <div class="card w-100">
                                                             <div class="card-body p-4">
                                                                 <div class="">
-                                                                    <strong>{{ comentario.usuario.username }}</strong>
-                                                                    <p class="small"><strong>Nota:{{ comentario.nota }}</strong></p>
+                                                                    <strong>Usuario: {{ comentario.usuario.username }}</strong>
+                                                                    {% comment %} <p class="small"><strong>Nota:{{ comentario.nota }}</strong></p> {% endcomment %}
                                                                     <p class="small">
-                                                                        {% comment %} <strong>Rating:{{ comentario.rating }}</strong>  {% endcomment %}
-                                                                        <strong>Rating:
+                                                                        <strong>Nota:
+                                                                            {% if comentario.rating == 1%}
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                                    <i class="fa fa-star"></i>
+                                                                                    <i class="fa fa-star"></i>
+                                                                                    <i class="fa fa-star"></i>
+                                                                                    <i class="fa fa-star"></i>
+                                                                            {% endif %}
+                                                                            {% if comentario.rating == 2%}
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                                    <i class="fa fa-star"></i>
+                                                                                    <i class="fa fa-star"></i>
+                                                                                    <i class="fa fa-star"></i>
+                                                                            {% endif %}
                                                                             {% if comentario.rating == 3%}
-                                                                                <h1>32323</h1>
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                                    <i class="fa fa-star"></i>
+                                                                                    <i class="fa fa-star"></i>
+                                                                            {% endif %}
+                                                                            {% if comentario.rating == 4%}
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                            {% endif %}
+                                                                            {% if comentario.rating == 5%}
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                                    <i class="fa fa-star rating-color"></i>
+                                                                                    <i class="fa fa-star rating-color"></i>
                                                                             {% endif %}
                                                                         </strong> 
                                                                     </p>
-                                                                    <p class="small">{{ comentario.data_criacao }}</p>
                                                                     <p>
+                                                                        Comentario: <br>
                                                                         {{ comentario.texto }}
                                                                     </p>
+                                                                    <p class="small">{{ comentario.data_criacao }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -98,6 +130,7 @@
                             
                         </div>
                         <div class="div2"> 
+                            <br><strong>Nota media:</strong> {{ destino.nota }}<br>
                             <form action="{% url 'destino_comentario_create' destino.id %}" method="POST"> {%      csrf_token %}
                                 <section>
                                     <div class="container my-5 py-5 text-dark">
@@ -116,7 +149,6 @@
                             
                                                             <div class="form-outline">
                                                                 <label for="comentario_nota">Nota:</label>
-                                                                <input type="number" class="form-control" id="comentario_nota" name="comentario_nota" min="0" max="5">
                                                             </div>
 
                                                             <div class="form-outline">
@@ -178,7 +210,7 @@
                                 </section>
                             </form>
                         </div>
-                        <div class="div3"><strong>Nota:</strong> {{ destino.nota }}<br> </div>
+                        <div class="div3"> </div>
                     </div>
 
                   

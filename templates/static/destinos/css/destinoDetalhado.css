@@ -1,25 +1,3 @@
-.rating input {
-    display: none;
-}
-
-.rating label {
-    display: block;
-    cursor: pointer;
-    width: 50px;
-}
-
-.rating label:before {
-    content: '\f005';
-    font-family: fontAwesome;
-    color: white;
-}
-
-/* .rating label:after{
-    content: '\f005';
-    font-family: fontAwesome;
-    color: yellow;
-} */
-
 .parent {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -50,24 +28,15 @@
 }
 
 
-/* .container-wrapper {
-    background-color: #EDF0F9;
-} */
-
 .container {
     height: auto;
 }
 
 .rating-wrapper {
     align-self: center;
-    /* box-shadow: 7px 7px 25px rgba(198, 206, 237, .7),
-        -7px -7px 35px rgba(255, 255, 255, .7),
-        inset 0px 0px 4px rgba(255, 255, 255, .9),
-        inset 7px 7px 15px rgba(198, 206, 237, .8); */
     border-radius: 5rem;
     display: inline-flex;
     direction: rtl !important;
-    /* padding: 1.5rem 2.5rem; */
     margin-left: auto;
 
 
@@ -106,4 +75,18 @@
     input:checked~label {
         color: yellow;
     }
+}
+
+.ratings i{
+    
+    color:#cecece;
+    font-size:32px;
+}
+
+.rating-color{
+    color:#fbc634 !important;
+}
+
+.t{
+    border: 2px solid red;
 }
