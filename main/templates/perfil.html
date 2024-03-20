@@ -3,73 +3,170 @@
 
 {% block 'cabecalho' %}
 
-    <link rel="stylesheet" href="{% static 'destinos/css/destinoDetalhado.css' %}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
-    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
-    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'destinos/css/destinoDetalhado.css' %}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
+<link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+<script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
 
 {% endblock 'cabecalho' %}
 
 {% block 'conteudo' %}
 
-    {% if comentarios %}
-    {% for comentario in comentarios %}
-        <div class="container my-5 py-5 text-dark ">
-            <div class="row d-flex justify-content-center ">
-                <div class="col-md-11 col-lg-9 col-xl-7 card-comentario">
-                    <div class="d-flex flex-start mb-4">
-                        <img class="rounded-circle shadow-1-strong me-3"
-                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="65"
-                        height="65" />
-                        <div class="card w-100">
-                            <div class="card-body p-4">
-                                <div class="">
-                                    <strong>Usuario: {{ comentario.usuario.username }}</strong>
-                                    {% comment %} <p class="small"><strong>Nota:{{ comentario.nota }}</strong></p> {% endcomment %}
-                                    <p class="small">
-                                        <strong>Nota:
-                                            {% if comentario.rating == 1%}
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                            {% endif %}
-                                            {% if comentario.rating == 2%}
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                            {% endif %}
-                                            {% if comentario.rating == 3%}
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                            {% endif %}
-                                            {% if comentario.rating == 4%}
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                            {% endif %}
-                                            {% if comentario.rating == 5%}
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                                    <i class="fa fa-star rating-color"></i>
-                                            {% endif %}
-                                        </strong> 
+
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col">
+                    <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">User</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                            <h5 class="my-3">@{{user.username}}</h5>
+                            <p class="text-muted mb-1">Full Stack Developer</p>
+                            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                            {% comment %} <div class="d-flex justify-content-center mb-2">
+                                <button type="button" class="btn btn-primary">Follow</button>
+                                <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                            </div> {% endcomment %}
+                        </div>
+                    </div>
+                    <div class="card mb-4 mb-lg-0">
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush rounded-3">
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                                    <p class="mb-0">@mdbootstrap</p>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                                    <p class="mb-0">mdbootstrap</p>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                                    <p class="mb-0">mdbootstrap</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Nome Completo</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{user.first_name}} {{user.last_name}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Email</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{user.email}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Celular</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{user.profile.telefone}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Address</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4 mb-md-0">
+                                <div class="card-body">
+                                    <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project
+                                        Status
                                     </p>
-                                    <p>
-                                        Comentario: <br>
-                                        {{ comentario.texto }}
+                                    <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                                    <div class="progress rounded" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                                    <div class="progress rounded" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                                    <div class="progress rounded" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                                    <div class="progress rounded" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                                    <div class="progress rounded mb-2" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4 mb-md-0">
+                                <div class="card-body">
+                                    <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project
+                                        Status
                                     </p>
-                                    <p class="small">{{ comentario.data_criacao }}</p>
+                                    <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                                    <div class="progress rounded" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                                    <div class="progress rounded" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                                    <div class="progress rounded" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                                    <div class="progress rounded" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                                    <div class="progress rounded mb-2" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -77,9 +174,77 @@
                 </div>
             </div>
         </div>
+    </section>
+
+
+    {% if comentarios %}
+    {% for comentario in comentarios %}
+    <div class="container my-5 py-5 text-dark ">
+        <div class="row d-flex justify-content-center ">
+            <div class="col-md-11 col-lg-9 col-xl-7 card-comentario">
+                <div class="d-flex flex-start mb-4">
+                    <img class="rounded-circle shadow-1-strong me-3"
+                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="65"
+                        height="65" />
+                    <div class="card w-100">
+                        <div class="card-body p-4">
+                            <div class="">
+                                <strong>Usuario: {{ comentario.usuario.username }}</strong>
+                                <p class="small"><strong>Nota:{{ comentario.nota }}</strong></p>
+                                <p class="small">
+                                    <strong>Nota:
+                                        {% if comentario.rating == 1%}
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        {% endif %}
+                                        {% if comentario.rating == 2%}
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        {% endif %}
+                                        {% if comentario.rating == 3%}
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        {% endif %}
+                                        {% if comentario.rating == 4%}
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        {% endif %}
+                                        {% if comentario.rating == 5%}
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        {% endif %}
+                                    </strong>
+                                </p>
+                                <p>
+                                    Comentario: <br>
+                                    {{ comentario.texto }}
+                                </p>
+                                <p class="small">{{ comentario.data_criacao }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endfor %}
     {% else %}
-    <p>Nenhum comentário encontrado para este destino.</p>
-    {% endif %}  
+    <p>Este perfil ainda nao realizou nenhum comentario</p>
+    {% endif %}
 
 {% endblock 'conteudo' %}

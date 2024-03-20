@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from django.contrib.messages import constants
 from django.contrib import messages, auth
 from destinos.models import Comentario
+from .models import Profile
 
 
 class HomeView(TemplateView):
@@ -16,25 +17,37 @@ def cadastro(request):
     if request.method == "GET":
         return render(request, "cadastro.html")
     elif request.method == "POST":
+        first_name = request.POST.get("nome")
+        last_name = request.POST.get("sobrenome")
         username = request.POST.get("username")
         email = request.POST.get("email")
+        phone = request.POST.get("telefone")
         senha = request.POST.get("senha")
         confirmar_senha = request.POST.get("confirmar_senha")
 
-        if not senha == confirmar_senha:
-            messages.add_message(request, constants.ERROR, "Senhas não conferem")
+        if not senha == confirmar_senha or not senha:
+            messages.add_message(request, constants.ERROR, "Senhas não conferem ou não preenchidas")
             return redirect("cadastro")
+        if not username:
+            messages.add_message(request, constants.ERROR, "Nome de usuario nao pode estar vazio")
+            return redirect("cadastro")
+        if not email:
+            messages.add_message(request, constants.ERROR, "Email nao pode estar vazio")
+            return redirect("cadastro"),
         user = User.objects.filter(username=username)
 
         if user.exists():
             messages.add_message(request, constants.ERROR, "Usuario já existe")
             return redirect("cadastro")
         try:
-            User.objects.create_user(username=username, password=senha, email=email)
-            return redirect("login")
+            user = User.objects.create_user(username=username, password=senha, email=email, first_name=first_name, last_name=last_name)
+            profile = Profile.objects.create(user=user, telefone=phone)
+            auth.login(request, user)
+            return redirect("home")
         except:
             messages.add_message(request, constants.ERROR, "Erro interno do servidor")
             return redirect("cadastro")
+
 
 
 def login(request):
@@ -61,9 +74,10 @@ def logout(request):
     return redirect("home")
 
 
-def perfil(request, user_id):
+def perfil(request, id):
+    perfil = User.objects.get(id=id)
     comentarios = (
-        Comentario.objects.all().filter(usuario__id=user_id).order_by("-data_criacao")
+        Comentario.objects.all().filter(usuario__id=id).order_by("-data_criacao")
     )
     print('comentarios')
     return render(request, "perfil.html", {"comentarios": comentarios})

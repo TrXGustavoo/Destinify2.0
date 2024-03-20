@@ -21,7 +21,7 @@
     <div class="container">
         <h1>Detalhes do Destino</h1>
         <div class="card">
-            <img class="card-img-top" src="{{ destino.foto.url }}" alt="{{ destino.nome }}">
+            <img class="card-img-top" src="{% static 'destinos/img/piramides.jpg' %}" alt="{{ destino.nome }}">
             <div class="card-body">
                 <h2 class="card-title">{{ destino.nome }}</h2>
                 <p class="card-text">
@@ -30,11 +30,7 @@
             </div>
         </div>
         <div class="bloco-abaixo">
-            <i class="fa fa-star-half-o" aria-hidden="true"></i>
-            <strong>Nota:</strong> {{ destino.nota }}<br>
-            {% comment %} <strong>Rating:</strong> {{ comentario.avarage_rating}}<br> {% endcomment %}
             <br>
-            
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                   <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Descrição</button>
@@ -68,7 +64,7 @@
                                                         <div class="card w-100">
                                                             <div class="card-body p-4">
                                                                 <div class="">
-                                                                    <strong>Usuario: {{ comentario.usuario.username }}</strong>
+                                                                    <strong>Usuario:<a href="{% url 'perfil' comentario.usuario %}">@{{ comentario.usuario.username }}</a></strong>
                                                                     {% comment %} <p class="small"><strong>Nota:{{ comentario.nota }}</strong></p> {% endcomment %}
                                                                     <p class="small">
                                                                         <strong>Nota:
