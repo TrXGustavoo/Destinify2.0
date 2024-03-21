@@ -6,7 +6,10 @@ from django.views.generic import TemplateView
 from django.contrib.messages import constants
 from django.contrib import messages, auth
 from destinos.models import Comentario
-from .models import Profile
+from .models import *
+from django.views.generic import FormView
+
+
 
 
 class HomeView(TemplateView):
@@ -24,6 +27,9 @@ def cadastro(request):
         phone = request.POST.get("telefone")
         senha = request.POST.get("senha")
         confirmar_senha = request.POST.get("confirmar_senha")
+        rua = request.POST.get("rua")
+        estado = request.POST.get("estado")
+        cidade = request.POST.get("cidade")
 
         if not senha == confirmar_senha or not senha:
             messages.add_message(request, constants.ERROR, "Senhas não conferem ou não preenchidas")
@@ -41,7 +47,8 @@ def cadastro(request):
             return redirect("cadastro")
         try:
             user = User.objects.create_user(username=username, password=senha, email=email, first_name=first_name, last_name=last_name)
-            profile = Profile.objects.create(user=user, telefone=phone)
+            endereco = Endereco.objects.create(rua=rua, estado=estado, cidade=cidade)
+            profile = Profile.objects.create(user=user, telefone=phone, endereco=endereco)
             auth.login(request, user)
             return redirect("home")
         except:
@@ -75,9 +82,9 @@ def logout(request):
 
 
 def perfil(request, id):
-    perfil = User.objects.get(id=id)
+    profile = Profile.objects.get(user__id=id)
     comentarios = (
         Comentario.objects.all().filter(usuario__id=id).order_by("-data_criacao")
     )
-    print('comentarios')
-    return render(request, "perfil.html", {"comentarios": comentarios})
+    return render(request, "perfil.html", {"perfil":profile,"comentarios": comentarios})
+
