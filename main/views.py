@@ -7,7 +7,8 @@ from django.contrib.messages import constants
 from django.contrib import messages, auth
 from destinos.models import Comentario
 from .models import *
-from django.views.generic import FormView
+from django.shortcuts import get_object_or_404
+
 
 
 
@@ -81,10 +82,11 @@ def logout(request):
     return redirect("home")
 
 
-def perfil(request, id):
-    profile = Profile.objects.get(user__id=id)
+def perfil(request, username):
+    # profile = Profile.objects.get(user__id=id)
+    profile = get_object_or_404(User, username=username)
     comentarios = (
-        Comentario.objects.all().filter(usuario__id=id).order_by("-data_criacao")
+        Comentario.objects.all().filter(usuario__id=profile.id).order_by("-data_criacao")
     )
-    return render(request, "perfil.html", {"perfil":profile,"comentarios": comentarios})
+    return render(request, "perfil.html", {"comentarios": comentarios,"perfil":profile})
 

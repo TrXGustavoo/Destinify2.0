@@ -43,8 +43,8 @@ def destino_detalhe(request, destino_id):
     
     if comentarios.exists():
         media_nota = media_nota / comentarios.count()
-        destino.nota = round(media_nota, 1)
-        destino.save()
+    destino.nota = round(media_nota, 1)
+    destino.save()
     
 
     return render(request, 'destinoDetalhado.html',{'destino': destino, 'comentarios': comentarios})
