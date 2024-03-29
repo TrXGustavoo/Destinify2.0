@@ -64,8 +64,10 @@
                                                         <div class="card w-100">
                                                             <div class="card-body p-4">
                                                                 <div class="">
-                                                                    <strong>Usuario:<a href="{% 'perfil' comentario.usuario.username %}">@{{ comentario.usuario.username }}</a></strong>
-                                                                    {% comment %} <p class="small"><strong>Nota:{{ comentario.nota }}</strong></p> {% endcomment %}
+                                                                    <strong>Usuario:
+                                                                      
+                                                                        <a href="{% url 'perfil' comentario.usuario.username %}">@{{ comentario.usuario.username }}</a>
+                                                                    </strong>
                                                                     <p class="small">
                                                                         <strong>Nota:
                                                                             {% if comentario.rating == 1%}
