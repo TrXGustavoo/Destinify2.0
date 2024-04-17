@@ -55,7 +55,6 @@ def destino_comentario_create(request, destino_id):
     if request.method == 'POST':
         texto = request.POST.get("comentario_texto")
         rating = request.POST.get("star-rating")
-        print(rating)
         comentario = Comentario(
             texto = texto,
             usuario = request.user,

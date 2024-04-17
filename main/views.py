@@ -8,6 +8,11 @@ from django.contrib import messages, auth
 from destinos.models import Comentario
 from .models import *
 from django.shortcuts import get_object_or_404
+from django.http import JsonResponse, HttpResponseBadRequest
+from django.core.files.storage import default_storage
+from django.views.decorators.csrf import csrf_exempt
+from .forms import ProfileForm
+
 
 
 
@@ -83,10 +88,19 @@ def logout(request):
 
 
 def perfil(request, username):
-    # profile = Profile.objects.get(user__id=id)
     profile = get_object_or_404(User, username=username)
     comentarios = (
         Comentario.objects.all().filter(usuario__id=profile.id).order_by("-data_criacao")
     )
-    return render(request, "perfil.html", {"comentarios": comentarios,"perfil":profile})
 
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile.profile)
+        if form.is_valid():
+            form.save()
+            return redirect('perfil', username=username)
+    else:
+        form = ProfileForm(instance=profile.profile)
+
+    fotos_perfil = Profile.objects.filter(user=profile)
+
+    return render(request, "perfil.html", {"comentarios": comentarios, "perfil": profile, "form": form, "fotos_perfil": fotos_perfil})
