@@ -64,8 +64,16 @@
                                                         <div class="card w-100">
                                                             <div class="card-body p-4">
                                                                 <div class="">
+                                                                    {% for foto in fotos_perfil %}
+                                                                        {% if comentario.usuario.profile.foto %}
+                                                                            <div class="contenedor-imagen">
+                                                                                <img src="{{ comentario.usuario.profile.foto.url }}" alt="avatar" class="rounded-circle img-fluid" style="width: 50px;" >
+                                                                            </div>
+                                                                        {% else %}
+                                                                            <img src="{% static 'perfil/img/perfilpadrao.jpg' %}" alt="avatar" class="rounded-circle img-fluid" style="width: 50px;" >
+                                                                        {% endif %}
+                                                                    {% endfor %}
                                                                     <strong>Usuario:
-                                                                      
                                                                         <a href="{% url 'perfil' comentario.usuario.username %}">@{{ comentario.usuario.username }}</a>
                                                                     </strong>
                                                                     <p class="small">

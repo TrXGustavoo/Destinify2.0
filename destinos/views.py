@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Comentario
 from .forms import ComentarioForm
 from django.db.models import Avg
+from django.contrib.auth.models import User
+from main.models import Profile
 
 
 
@@ -45,9 +47,15 @@ def destino_detalhe(request, destino_id):
         media_nota = media_nota / comentarios.count()
     destino.nota = round(media_nota, 1)
     destino.save()
+     
+    profile = get_object_or_404(User, username=request.user.username)
+    fotos_perfil = Profile.objects.filter(user=profile)
+    print(profile)
+    usuario = User
+    print(usuario)
     
 
-    return render(request, 'destinoDetalhado.html',{'destino': destino, 'comentarios': comentarios})
+    return render(request, 'destinoDetalhado.html',{'destino': destino, 'comentarios': comentarios, 'fotos_perfil': fotos_perfil})
 
 
 def destino_comentario_create(request, destino_id):
@@ -65,4 +73,6 @@ def destino_comentario_create(request, destino_id):
         return redirect('destino_detalhe', destino.id)
     else:
         form = ComentarioForm()
+     
+    
     return render(request, 'destino_comentario_create.html', {'destino': destino, 'form': form})
