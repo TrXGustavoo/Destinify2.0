@@ -4,47 +4,11 @@
 {% block 'cabecalho' %}
 
 <link rel="stylesheet" href="{% static 'destinos/css/destinoDetalhado.css' %}" />
+<link rel="stylesheet" href="{% static 'perfil/css/perfil.css' %}" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
 <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
 <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
-<style>
-    .custom-form {
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-    
-    .custom-label {
-        display: block;
-        margin-bottom: 10px;
-        font-weight: bold;
-    }
-    
-    .custom-file-input {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-    
-    .custom-button {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    
-    .custom-button:hover {
-        background-color: #0056b3;
-    }
-</style>
+
 
 {% endblock 'cabecalho' %}
 
@@ -79,24 +43,22 @@
                                     {% endif %}
                                 {% endfor %}
                     
-                            <h5 class="my-3">@{{perfil.username}}</h5>
+                            <h5 class="my-3">@{{perfil.username}} e {{user}}</h5>
                             <p class="text-muted mb-1">Full Stack Developer</p>
                             <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
-                            {% comment %} <div class="d-flex justify-content-center mb-2">
-                                <button type="button" class="btn btn-primary">Follow</button>
-                                <button type="button" class="btn btn-outline-primary ms-1">Message</button>
-                            </div> {% endcomment %}
-                            <form method="POST" enctype="multipart/form-data" class="custom-form">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <label for="foto" class="custom-label">Selecione uma foto:</label>
-                                    <input type="file" id="foto" name="foto" accept="image/*" class="custom-file-input">
-                                </div>
-                                <button type="submit" class="btn btn-primary custom-button">Adicionar</button>
-                            </form>
+                            {% if show_form %}  
+                                <form method="POST" enctype="multipart/form-data" class="custom-form">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="foto" class="custom-label">Selecione uma foto:</label>
+                                        <input type="file" id="foto" name="foto" accept="image/*" class="custom-file-input">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary custom-button">Adicionar</button>
+                                </form>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class="card mb-4 mb-lg-0">
+                    {% comment %} <div class="card mb-4 mb-lg-0">
                         <div class="card-body p-0">
                             <ul class="list-group list-group-flush rounded-3">
                                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
@@ -113,7 +75,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
                 <div class="col-lg-8">
                     <div class="card mb-4">
@@ -155,47 +117,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        {% comment %} <div id="carouselFotosPerfil" class="carousel slide carousel-fade" data-ride="carousel">
-                            <div class="carousel-inner">
-                                {% if fotos_perfil %}
-                                    {% for foto in fotos_perfil %}
-                                        <p>{{perfil}}</p>
-                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                            <img src="{{ perfil.fotos.url }}" class="d-block w-100" alt="Foto de Perfil">
-                                        </div>
-                                    {% endfor %}
-                                {% else %}
-                                    <p>Nenhuma foto disponível para este perfil.</p>
-                                {% endif %}
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Fale sobre voce</p>
+                                </div>
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselFotosPerfil" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselFotosPerfil" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div> {% endcomment %}
-                        
+                            <hr>
+                            <div class="row">
+
+                            </div>
+                        </div>
                     </div>
-                    {% comment %} <form method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                    
-                        <button type="submit" class="btn btn-primary">Adicionar</button>
-                    </form> {% endcomment %}
-                   {% comment %} <form method="POST" enctype="multipart/form-data" id="form-fotos" action="{% url 'perfil' perfil.username %}">
-                        {% csrf_token %}
-                        <input type="file" name="photos" accept="image/*" multiple>
-                        <button type="submit" class="btn btn-primary">Adicionar</button>
-                    </form> {% endcomment %}
                 </div>
             </div>
         </div>
     </section>
-
 
     {% if comentarios %}
     {% for comentario in comentarios %}
@@ -203,14 +141,19 @@
         <div class="row d-flex justify-content-center ">
             <div class="col-md-11 col-lg-9 col-xl-7 card-comentario">
                 <div class="d-flex flex-start mb-4">
-                    <img class="rounded-circle shadow-1-strong me-3"
-                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="65"
-                        height="65" />
                     <div class="card w-100">
                         <div class="card-body p-4">
                             <div class="">
+                                {% for foto in fotos_perfil %}
+                                    {% if comentario.usuario.profile.foto %}
+                                        <div class="contenedor-imagen">
+                                            <img src="{{ comentario.usuario.profile.foto.url }}" alt="avatar" class="rounded-circle img-fluid" style="width: 50px;" >
+                                        </div>
+                                    {% else %}
+                                        <img src="{% static 'perfil/img/perfilpadrao.jpg' %}" alt="avatar" class="rounded-circle img-fluid" style="width: 50px;" >
+                                    {% endif %}
+                                {% endfor %}
                                 <strong>Usuario: {{ comentario.usuario.username }}</strong>
-                                <p class="small"><strong>Nota:{{ comentario.nota }}</strong></p>
                                 <p class="small">
                                     <strong>Nota:
                                         {% if comentario.rating == 1%}

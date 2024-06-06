@@ -12,25 +12,26 @@
         <h1>Destinos Turísticos</h1>
         <form action="{% url 'destinos' %}" method="GET">
             <label for="pais">País:</label>
-            <input type="text" name="pais" id="pais" value="{{ pais }}">
+            <input class="form-control" type="text" name="pais" id="pais" value="{{ pais }}">
         
             <label for="cidade">Cidade:</label>
-            <input type="text" name="cidade" id="cidade" value="{{ cidade }}">
+            <input  class="form-control" type="text" name="cidade" id="cidade" value="{{ cidade }}">
         
             <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" value="{{ nome }}">
+            <input class="form-control" type="text" name="nome" id="nome" value="{{ nome }}">
         
             <label for="ordenar_por_nota">Ordenar por nota:</label>
-            <input type="checkbox" name="ordenar_por_nota" id="ordenar_por_nota" {{ ordenar_por_nota }}>
+            <input  type="checkbox" name="ordenar_por_nota" id="ordenar_por_nota" {{ ordenar_por_nota }}>
         
             <button type="submit">Filtrar</button>
             <button type="submit" name="resetar">Resetar</button>
         </form>        
+        <br>
         <div class="row">
             {% for destino in destinos %}
             <div class="col-md-4">
                 <div class="card">
-                    <img class="card-img-top" src="{{ destino.foto.url }}" alt="{{ destino.nome }}">
+                    <img class="card-img-top" src="{{destino.foto.url}}" alt="{{ destino.nome }}">
                     <div class="card-body">
                         <h2 class="card-title">{{ destino.nome }}</h2>
                         <p class="card-text">{{ destino.descricao }}</p>

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 
 
+
 class Endereco(models.Model):
     rua = models.CharField(max_length=255, null=True, blank=True)
     cidade = models.CharField(max_length=255, null=True, blank=True)
@@ -12,8 +13,8 @@ class Endereco(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    endereco = models.OneToOneField(Endereco, on_delete=models.CASCADE, null=True, blank=True)
     # Campos personalizados
-    
+    endereco = models.OneToOneField(Endereco, on_delete=models.CASCADE, null=True, blank=True)
+
     foto = models.ImageField(upload_to="perfil/", storage=FileSystemStorage(), blank=True, null=True, default="static/perfil/img/perfilpadrao.jpg")
     telefone = models.CharField(max_length=20, null=True, blank=True)

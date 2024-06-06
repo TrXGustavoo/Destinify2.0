@@ -6,3 +6,4 @@ admin.site.register(Endereco)
 
 admin.site.register(Profile)
 
+

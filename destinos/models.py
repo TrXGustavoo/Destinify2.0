@@ -1,29 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-RATING = (
-    (1, '1'),
-    (2, '2'),
-    (3, '3'),
-    (4, 'QUATOR'),
-    (5, 'CINCO'),
-    
-)
+from django.core.files.storage import FileSystemStorage
 
 class LugarTuristico(models.Model):
     nome = models.CharField(max_length=255)
     pais = models.CharField(max_length=255)
-    estado = models.CharField(max_length=255)
+    estado = models.CharField(max_length=255,  blank=True, null=True, default='')
     cidade = models.CharField(max_length=255)
-    # fotos = models.ManyToManyField('Foto')
+    foto = models.ImageField(upload_to="lugares/", blank=True, null=True)
     descricao = models.TextField()
     nota = models.DecimalField(max_digits=2, decimal_places=1, null=True, default=0)
     
     comentarios = models.ManyToManyField('Comentario', blank=True)
 
-# class Foto(models.Model):
-#     imagem = models.ImageField(upload_to='lugares_turisticos/')
-#     legenda = models.CharField(max_length=255)
 
 class Comentario(models.Model):
     texto = models.CharField(max_length=255)

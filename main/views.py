@@ -12,9 +12,7 @@ from django.http import JsonResponse, HttpResponseBadRequest
 from django.core.files.storage import default_storage
 from django.views.decorators.csrf import csrf_exempt
 from .forms import ProfileForm
-
-
-
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -86,7 +84,7 @@ def logout(request):
     auth.logout(request)
     return redirect("home")
 
-
+@login_required
 def perfil(request, username):
     profile = get_object_or_404(User, username=username)
     comentarios = (
@@ -102,5 +100,9 @@ def perfil(request, username):
         form = ProfileForm(instance=profile.profile)
 
     fotos_perfil = Profile.objects.filter(user=profile)
-
-    return render(request, "perfil.html", {"comentarios": comentarios, "perfil": profile, "form": form, "fotos_perfil": fotos_perfil})
+    
+    if request.user == profile: 
+        return render(request, "perfil.html", {"comentarios": comentarios, "perfil": profile, "form": form, "fotos_perfil": fotos_perfil, "show_form": True}) 
+        
+    else:
+        return render(request, "perfil.html", {"comentarios": comentarios, "perfil": profile, "fotos_perfil": fotos_perfil, "show_form": False})  
