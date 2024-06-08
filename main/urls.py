@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from main import views
+from .views import SobreView
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.conf.urls.static import static
@@ -12,6 +13,7 @@ urlpatterns = [
     path('accounts/login/', views.login, name='login'),
     path('accounts/logout', views.logout, name='logout'),
     path('perfil/<username>/', views.perfil, name='perfil'),
+    path('sobre', SobreView.as_view(), name='sobre'),
 
 ]
 

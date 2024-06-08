@@ -18,212 +18,209 @@
 {% endblock 'cabecalho' %}
 
 {% block 'conteudo' %}
-    <div class="container">
-        <h1>Detalhes do Destino</h1>
+    <div class="container mt-5">
         <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <img class="card-img-top" src="{{destino.foto.url}}" alt="{{ destino.nome }}">
+            <div class="col-md-4"> 
+                <div class="card mb-4">
+                    <img class="card-img-top" src="{{ destino.foto.url }}" alt="{{ destino.nome }}">
                     <div class="card-body">
                         <h2 class="card-title">{{ destino.nome }}</h2>
-                        <p class="card-text">
-                            <strong>Localidade:</strong>   {{ destino.cidade }}, {{ destino.pais }}<br>
-                        </p>
+                        <p class="card-text">Localidade: {{ destino.cidade }}, {{ destino.pais }}</p>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="bloco-abaixo">
-            <br>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Descrição</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Comentarios</button>
-                </li>
-            </ul>
-              
-            <div class="tab-content">
-                <div class="tab-pane active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                    <br>
-                    <strong>{{ destino.descricao }}</strong>
-                </div>
-                <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+            <div class="col-md-8">
+                <br>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Descrição</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Comentarios</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                        <br>
+                        <strong>{{ destino.descricao }}</strong>
+                    </div>
+                    <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
 
 
-                    <div class="parent">
-                        <div class="div1"> 
-                            <section class="w-100">
-                                <br><strong>Comentários:</strong> {{comentarios.count}}
-                                {% if comentarios %}
-                                    {% for comentario in comentarios %}
-                                        <div class="container my-5 py-5 text-dark ">
-                                            <div class="row d-flex justify-content-center ">
-                                                <div class="col-md-11 col-lg-9 col-xl-7 card-comentario">
-                                                    <div class="d-flex flex-start mb-4">
-                                                        <div class="card w-100">
-                                                            <div class="card-body p-4">
-                                                                <div class="">
-                                                                    {% for foto in fotos_perfil %}
-                                                                        {% if comentario.usuario.profile.foto %}
-                                                                            <div class="contenedor-imagen">
-                                                                                <img src="{{ comentario.usuario.profile.foto.url }}" alt="avatar" class="rounded-circle img-fluid" style="width: 50px;" >
-                                                                            </div>
-                                                                        {% else %}
-                                                                            <img src="{% static 'perfil/img/perfilpadrao.jpg' %}" alt="avatar" class="rounded-circle img-fluid" style="width: 50px;" >
-                                                                        {% endif %}
-                                                                    {% endfor %}
-                                                                    <strong>Usuario:
-                                                                        <a href="{% url 'perfil' comentario.usuario.username %}">@{{ comentario.usuario.username }}</a>
-                                                                    </strong>
-                                                                    <p class="small">
-                                                                        <strong>Nota:
-                                                                            {% if comentario.rating == 1%}
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                                    <i class="fa fa-star"></i>
-                                                                                    <i class="fa fa-star"></i>
-                                                                                    <i class="fa fa-star"></i>
-                                                                                    <i class="fa fa-star"></i>
+                        <div class="parent">
+                            <div class="div1"> 
+                                <section class="w-100">
+                                    <br><strong>Comentários:</strong> {{comentarios.count}}
+                                    {% if comentarios %}
+                                        {% for comentario in comentarios %}
+                                            <div class="container my-5 py-5 text-dark ">
+                                                <div class="row d-flex justify-content-center ">
+                                                    <div class="col-md-11 col-lg-9 col-xl-7 card-comentario">
+                                                        <div class="d-flex flex-start mb-4">
+                                                            <div class="card w-100">
+                                                                <div class="card-body p-4">
+                                                                    <div class="">
+                                                                        {% for foto in fotos_perfil %}
+                                                                            {% if comentario.usuario.profile.foto %}
+                                                                                <div class="contenedor-imagen">
+                                                                                    <img src="{{ comentario.usuario.profile.foto.url }}" alt="avatar" class="rounded-circle img-fluid" style="width: 50px;" >
+                                                                                </div>
+                                                                            {% else %}
+                                                                                <img src="{% static 'perfil/img/perfilpadrao.jpg' %}" alt="avatar" class="rounded-circle img-fluid" style="width: 50px;" >
                                                                             {% endif %}
-                                                                            {% if comentario.rating == 2%}
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                                    <i class="fa fa-star"></i>
-                                                                                    <i class="fa fa-star"></i>
-                                                                                    <i class="fa fa-star"></i>
-                                                                            {% endif %}
-                                                                            {% if comentario.rating == 3%}
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                                    <i class="fa fa-star"></i>
-                                                                                    <i class="fa fa-star"></i>
-                                                                            {% endif %}
-                                                                            {% if comentario.rating == 4%}
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                            {% endif %}
-                                                                            {% if comentario.rating == 5%}
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                                    <i class="fa fa-star rating-color"></i>
-                                                                            {% endif %}
-                                                                        </strong> 
-                                                                    </p>
-                                                                    <p>
-                                                                        Comentario: <br>
-                                                                        {{ comentario.texto }}
-                                                                    </p>
-                                                                    <p class="small">{{ comentario.data_criacao }}</p>
+                                                                        {% endfor %}
+                                                                        <strong>Usuario:
+                                                                            <a href="{% url 'perfil' comentario.usuario.username %}">@{{ comentario.usuario.username }}</a>
+                                                                        </strong>
+                                                                        <p class="small">
+                                                                            <strong>Nota:
+                                                                                {% if comentario.rating == 1%}
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                        <i class="fa fa-star"></i>
+                                                                                        <i class="fa fa-star"></i>
+                                                                                        <i class="fa fa-star"></i>
+                                                                                        <i class="fa fa-star"></i>
+                                                                                {% endif %}
+                                                                                {% if comentario.rating == 2%}
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                        <i class="fa fa-star"></i>
+                                                                                        <i class="fa fa-star"></i>
+                                                                                        <i class="fa fa-star"></i>
+                                                                                {% endif %}
+                                                                                {% if comentario.rating == 3%}
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                        <i class="fa fa-star"></i>
+                                                                                        <i class="fa fa-star"></i>
+                                                                                {% endif %}
+                                                                                {% if comentario.rating == 4%}
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                {% endif %}
+                                                                                {% if comentario.rating == 5%}
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                        <i class="fa fa-star rating-color"></i>
+                                                                                {% endif %}
+                                                                            </strong> 
+                                                                        </p>
+                                                                        <p>
+                                                                            Comentario: <br>
+                                                                            {{ comentario.texto }}
+                                                                        </p>
+                                                                        <p class="small">{{ comentario.data_criacao }}</p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    {% endfor %}
-                                {% else %}
-                                    <p>Nenhum comentário encontrado para este destino.</p>
-                                {% endif %}  
-                            </section>
-                            
-                            
-                        </div>
-                        <div class="div2"> 
-                            <br><strong>Nota media:</strong> {{ destino.nota }}<br>
-                            <form action="{% url 'destino_comentario_create' destino.id %}" method="POST"> {%      csrf_token %}
-                                <section>
-                                    <div class="container my-5 py-5 text-dark">
-                                        <div class="row d-flex justify-content-center">
-                                            <div class="col-md-10 col-lg-8 col-xl-6 card-add-comentario">
-                                                <div class="card">
-                                                    <div class="card-body p-4">
-                                                        <div class="d-flex flex-start w-100">
-                                                            <div class="w-100">
-                                                            <h5>Adicione um comentario</h5>
-                                                            
-                                                            <div class="form-outline">
-                                                                <label for="comentario_texto">Comentário:</label>
-                                                                <textarea class="form-control" id="comentario_texto" name="comentario_texto" rows="3"></textarea>
-                                                            </div>
-                            
-                                                            <div class="form-outline">
-                                                                <label for="comentario_nota">Nota:</label>
-                                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>Nenhum comentário encontrado para este destino.</p>
+                                    {% endif %}  
+                                </section>
+                                
+                                
+                            </div>
+                            <div class="div2"> 
+                                <br><strong>Nota media:</strong> {{ destino.nota }}<br>
+                                <form action="{% url 'destino_comentario_create' destino.id %}" method="POST"> {%      csrf_token %}
+                                    <section>
+                                        <div class="container my-5 py-5 text-dark">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col-md-10 col-lg-8 col-xl-6 card-add-comentario">
+                                                    <div class="card">
+                                                        <div class="card-body p-4">
+                                                            <div class="d-flex flex-start w-100">
+                                                                <div class="w-100">
+                                                                <h5>Adicione um comentario</h5>
+                                                                
+                                                                <div class="form-outline">
+                                                                    <label for="comentario_texto">Comentário:</label>
+                                                                    <textarea class="form-control" id="comentario_texto" name="comentario_texto" rows="3"></textarea>
+                                                                </div>
+                                
+                                                                <div class="form-outline">
+                                                                    <label for="comentario_nota">Nota:</label>
+                                                                </div>
 
-                                                            <div class="form-outline">
-                                                                <div class="container-wrapper">  
-                                                                    <div class="container d-flex align-items-center justify-content-center">
-                                                                      <div class="row justify-content-center">    
-                                                                        
-                                                                            <!-- star rating -->
-                                                                            <div class="rating-wrapper">
+                                                                <div class="form-outline">
+                                                                    <div class="container-wrapper">  
+                                                                        <div class="container d-flex align-items-center justify-content-center">
+                                                                        <div class="row justify-content-center">    
                                                                             
-                                                                                <!-- star 5 -->
-                                                                                <input type="radio" id="5-star-rating" name="star-rating" value="5">
-                                                                                <label for="5-star-rating" class="star-rating">
-                                                                                    <i class="fas fa-star d-inline-block"></i>
-                                                                                </label>
+                                                                                <!-- star rating -->
+                                                                                <div class="rating-wrapper">
                                                                                 
-                                                                                <!-- star 4 -->
-                                                                                <input type="radio" id="4-star-rating" name="star-rating" value="4">
-                                                                                <label for="4-star-rating" class="star-rating star">
-                                                                                    <i class="fas fa-star d-inline-block"></i>
-                                                                                </label>
-                                                                                
-                                                                                <!-- star 3 -->
-                                                                                <input type="radio" id="3-star-rating" name="star-rating" value="3">
-                                                                                <label for="3-star-rating" class="star-rating star">
-                                                                                    <i class="fas fa-star d-inline-block"></i>
-                                                                                </label>
-                                                                                
-                                                                                <!-- star 2 -->
-                                                                                <input type="radio" id="2-star-rating" name="star-rating" value="2">
-                                                                                <label for="2-star-rating" class="star-rating star">
-                                                                                    <i class="fas fa-star d-inline-block"></i>
-                                                                                </label>
-                                                                                
-                                                                                <!-- star 1 -->
-                                                                                <input type="radio" id="1-star-rating" name="star-rating" value="1">
-                                                                                <label for="1-star-rating" class="star-rating star">
-                                                                                    <i class="fas fa-star d-inline-block"></i>
-                                                                                </label>
-                                                                            </div>
-                                                                       </div>
-                                                                    </div>
-                                                                </div>                                                                  
+                                                                                    <!-- star 5 -->
+                                                                                    <input type="radio" id="5-star-rating" name="star-rating" value="5">
+                                                                                    <label for="5-star-rating" class="star-rating">
+                                                                                        <i class="fas fa-star d-inline-block"></i>
+                                                                                    </label>
+                                                                                    
+                                                                                    <!-- star 4 -->
+                                                                                    <input type="radio" id="4-star-rating" name="star-rating" value="4">
+                                                                                    <label for="4-star-rating" class="star-rating star">
+                                                                                        <i class="fas fa-star d-inline-block"></i>
+                                                                                    </label>
+                                                                                    
+                                                                                    <!-- star 3 -->
+                                                                                    <input type="radio" id="3-star-rating" name="star-rating" value="3">
+                                                                                    <label for="3-star-rating" class="star-rating star">
+                                                                                        <i class="fas fa-star d-inline-block"></i>
+                                                                                    </label>
+                                                                                    
+                                                                                    <!-- star 2 -->
+                                                                                    <input type="radio" id="2-star-rating" name="star-rating" value="2">
+                                                                                    <label for="2-star-rating" class="star-rating star">
+                                                                                        <i class="fas fa-star d-inline-block"></i>
+                                                                                    </label>
+                                                                                    
+                                                                                    <!-- star 1 -->
+                                                                                    <input type="radio" id="1-star-rating" name="star-rating" value="1">
+                                                                                    <label for="1-star-rating" class="star-rating star">
+                                                                                        <i class="fas fa-star d-inline-block"></i>
+                                                                                    </label>
+                                                                                </div>
+                                                                        </div>
+                                                                        </div>
+                                                                    </div>                                                                  
+                                                                </div>
+                                
+                                                                <div class="d-flex justify-content-between mt-3">
+                                                                    <button type="submit" class="btn btn-danger">
+                                                                    Postar <i class="fas fa-long-arrow-alt-right ms-1"></i>
+                                                                    </button>
+                                                                </div>
+                                                                </div>
                                                             </div>
-                            
-                                                            <div class="d-flex justify-content-between mt-3">
-                                                                <button type="submit" class="btn btn-danger">
-                                                                Postar <i class="fas fa-long-arrow-alt-right ms-1"></i>
-                                                                </button>
                                                             </div>
-                                                            </div>
-                                                        </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </section>
-                            </form>
+                                    </section>
+                                </form>
+                            </div>
+                            <div class="div3"> </div>
                         </div>
-                        <div class="div3"> </div>
-                    </div>
 
-                  
+                    
+                    </div>
                 </div>
+                
             </div>
-              
         </div>
     </div>
 

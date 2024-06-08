@@ -106,3 +106,7 @@ def perfil(request, username):
         
     else:
         return render(request, "perfil.html", {"comentarios": comentarios, "perfil": profile, "fotos_perfil": fotos_perfil, "show_form": False})  
+
+
+class SobreView(TemplateView):
+    template_name = "sobreNos.html"

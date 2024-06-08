@@ -13,8 +13,7 @@ class Endereco(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # Campos personalizados
-    endereco = models.OneToOneField(Endereco, on_delete=models.CASCADE, null=True, blank=True)
 
-    foto = models.ImageField(upload_to="perfil/", storage=FileSystemStorage(), blank=True, null=True, default="static/perfil/img/perfilpadrao.jpg")
+    endereco = models.OneToOneField(Endereco, on_delete=models.CASCADE, null=True, blank=True)
+    foto = models.ImageField(upload_to="perfil/", storage=FileSystemStorage(), blank=True, null=True)
     telefone = models.CharField(max_length=20, null=True, blank=True)
