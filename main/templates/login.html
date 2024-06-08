@@ -20,7 +20,7 @@
                         
                         
                         <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                        <p class="text-white-50 mb-5">Please enter your </p>
+                        <p class="text-white-50 mb-5">Preencha com seus dados</p>
         
 
                         <div class="form-outline form-white mb-4">
@@ -40,10 +40,10 @@
     
                 </div>
     
-                {% comment %} <div>
-                    <p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a>
+                <div>
+                    <p class="mb-0">Não possui uma conta? <a href="{% url 'cadastro' %}" class="text-white-50 fw-bold">Registrar-se</a>
                     </p>
-                </div> {% endcomment %}
+                </div>
     
                 </div>
             </div>
@@ -51,18 +51,4 @@
         </div>
         </div>
     </section>
-
-    {% comment %} <form action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-
-        <div class="mb-3">
-            <label for="username" class="form-label">Nome de usuario</label>
-            <input type="text" name="username" placeholder="Usuario" class="form-control">          
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Senha</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" name="senha" placeholder="Senha">
-          </div>
-        <button type="submit" class="btn btn-primary">Entrar</button>
-    </form> {% endcomment %}
 {% endblock 'conteudo' %}

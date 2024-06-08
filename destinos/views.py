@@ -6,8 +6,10 @@ from .forms import ComentarioForm, LugarTuristicoForm
 from django.db.models import Avg
 from django.contrib.auth.models import User
 from main.models import Profile
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
+@login_required
 def destinos(request):
     # Obter parâmetros da requisição
     pais = request.GET.get("pais", "")
@@ -32,18 +34,22 @@ def destinos(request):
     return render(request, "destinos.html", {"destinos": destinos})
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def destino_create(request):
-    if request.method == 'POST':
-        form = LugarTuristicoForm(request.POST, request.FILES)  # Handle files
-        if form.is_valid():
-            lugar_turistico = form.save()
-            return redirect('destinos')
-    else:
-        form = LugarTuristicoForm()
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            form = LugarTuristicoForm(request.POST, request.FILES)
+            if form.is_valid():
+                lugar_turistico = form.save()
+                return redirect('destinos')
+        else:
+            form = LugarTuristicoForm()
 
-    return render(request, "destino_create.html", {"form": form})
+        return render(request, "destino_create.html", {"form": form})
+    return redirect('home')
 
 
+@login_required
 def destino_detalhe(request, destino_id):
     destino = get_object_or_404(LugarTuristico, pk=destino_id)
     comentarios = Comentario.objects.filter(destinoA=destino_id).order_by(
@@ -71,7 +77,7 @@ def destino_detalhe(request, destino_id):
         {"destino": destino, "comentarios": comentarios, "fotos_perfil": fotos_perfil},
     )
 
-
+@login_required
 def destino_comentario_create(request, destino_id):
     destino = get_object_or_404(LugarTuristico, pk=destino_id)
     if request.method == "POST":

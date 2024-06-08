@@ -16,17 +16,11 @@
     <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
     <ul>
       <li><a href="{% url 'home' %}" class="menu-logo"><img src="{% static 'geral/img/logoo.png' %}" /></a></li>
-      {% comment %} <li><a class='dropdown-arrow' href='http://'>Products</a>
-        <ul class='sub-menus'>
-          <li><a href="{% url 'destinos' %}">Destinos</a></li>
-          <li><a href='http://'>Products 2</a></li>
-          <li><a href='http://'>Products 3</a></li>
-          <li><a href='http://'>Products 4</a></li>
-        </ul>
-      </li> {% endcomment %}
       <li><a href="{% url 'destinos' %}">Destinos</a></li>
-      <li><a  href="{% url 'destino_create' %}">Criar</a></li>
-      <li><a href='http://'>Contact Us</a></li>
+      {% if user.is_superuser %}
+        <li><a  href="{% url 'destino_create' %}">Criar</a></li>
+      {% endif %}
+      <li><a href="{% url 'sobre' %}">Sobre nós</a></li>
       <li class="right-aligned"> 
         {% if not user.is_authenticated %}
             <a href="{% url 'cadastro' %}">Registrar</a>
