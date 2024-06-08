@@ -2,138 +2,165 @@
 {% load static %}
 
 {% block 'cabecalho' %}
-  <link rel="stylesheet" href="{% static 'geral/css/cadastro.css' %}">
+<link rel="stylesheet" href="{% static 'geral/css/cadastro.css' %}">
 {% endblock %}
 
 {% block 'conteudo' %}
 
-  
-  <br>
-  <section  class="container py-5 h-100">
-    <form action="{% url 'cadastro' %}" method="POST"> {% csrf_token %}
-        <div class="row mb-4">
-          <div class="col">
-            <input type="text" class="form-control" id="nome" name="nome" placeholder="Primeiro Nome ">
-          </div>
-          <div class="col">
-            <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Sobrenome">
-          </div>
-          <div class="col">
-            <input type="text" class="form-control" id="username" name="username" placeholder="Nome de Usuario">
-          </div>
-        </div>
-    
-        <div class="row mb-4">
+<br>
 
-          <div class="col"><input class="form-control" type="text" id="rua" name="rua" required placeholder="Rua"></div>
-          
+<section class="vh-100 gradient-custom">
+  <div class="container">
+  </div>
+  <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col">
-            <input type="text" class="form-control" id="cidade" name="cidade" required placeholder="Cidade">
-          </div>
-          
-          <div class="col">
-            <select id="estado" name="estado" required class="form-control">
-              <option value="">Selecione o estado</option>
-              <option value="AC">Acre</option>
-              <option value="AL">Alagoas</option>
-              <option value="AP">Amapá</option>
-              <option value="AM">Amazonas</option>
-              <option value="BA">Bahia</option>
-              <option value="CE">Ceará</option>
-              <option value="DF">Distrito Federal</option>
-              <option value="ES">Espírito Santo</option>
-              <option value="GO">Goiás</option>
-              <option value="MA">Maranhão</option>
-              <option value="MT">Mato Grosso</option>
-              <option value="MS">Mato Grosso do Sul</option>
-              <option value="MG">Minas Gerais</option>
-              <option value="PA">Pará</option>
-              <option value="PB">Paraíba</option>
-              <option value="PR">Paraná</option>
-              <option value="PE">Pernambuco</option>
-              <option value="PI">Piauí</option>
-              <option value="RJ">Rio de Janeiro</option>
-              <option value="RN">Rio Grande do Norte</option>
-              <option value="RS">Rio Grande do Sul</option>
-              <option value="RO">Rondônia</option>
-              <option value="RR">Roraima</option>
-              <option value="SC">Santa Catarina</option>
-              <option value="SP">São Paulo</option>
-              <option value="SE">Sergipe</option>
-              <option value="TO">Tocantins</option>
-            </select>
-          </div>
-          
-          <div class="col">
-            <input type="text" id="cep" class="form-control" name="cep" pattern="[0-9]{5}-[0-9]{3}" title="Digite o CEP no formato 99999-999" required placeholder="CEP">
-          </div>
-        </div>
-    
-        <div class="row mb-4">
-          <div class="col">
-            <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Digite seu número de celular">
-          </div>
-          <div class="col">
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Email">
-          </div>
-        </div>
-        
-        
-        <div class="row mb-4">
-          <div class="col">
-            <input type="password" class="form-control" id="exampleInputPassword1" name="senha" placeholder="Senha">
-          </div>
-          <div class="col">
-            <input type="password" class="form-control" id="exampleInputPassword2" name="confirmar_senha" placeholder="Digite a senha novamente">
-          </div>
-        </div>
+              <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                  <div class="card-body p-5 text-center">
 
-        <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4">Resgistrar</button>
-    
-    </form>
-  </section>
- 
+                      <div class="mb-md-5 mt-md-4 pb-5">
+
+                        <form action="{% url 'cadastro' %}" method="POST"> {% csrf_token %}
+
+                          <h2 class="fw-bold mb-2 text-uppercase">CADASTRE-SE PARA FAZER PARTE DA COMUNIDADE</h2>
+                          <br>
+
+                          <div class="row mb-4">
+                            <div class="col">
+                              <input type="text" class="form-control" id="nome" name="nome" placeholder="Primeiro Nome ">
+                            </div>
+                            <div class="col">
+                              <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Sobrenome">
+                            </div>
+                            <div class="col">
+                              <input type="text" class="form-control" id="username" name="username" placeholder="Nome de Usuario">
+                            </div>
+                          </div>
+                      
+                          <div class="row mb-4">
+                      
+                            <div class="col"><input class="form-control" type="text" id="rua" name="rua" required placeholder="Rua"></div>
+                      
+                            <div class="col">
+                              <input type="text" class="form-control" id="cidade" name="cidade" required placeholder="Cidade">
+                            </div>
+                      
+                            <div class="col">
+                              <select id="estado" name="estado" required class="form-control">
+                                <option value="">Selecione o estado</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                              </select>
+                            </div>
+                      
+                            <div class="col">
+                              <input type="text" id="cep" class="form-control" name="cep" pattern="[0-9]{5}-[0-9]{3}"
+                                title="Digite o CEP no formato 99999-999" required placeholder="CEP">
+                            </div>
+                          </div>
+                      
+                          <div class="row mb-4">
+                            <div class="col">
+                              <input type="text" class="form-control" id="telefone" name="telefone"
+                                placeholder="Digite seu número de celular">
+                            </div>
+                            <div class="col">
+                              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email"
+                                placeholder="Email">
+                            </div>
+                          </div>
+                      
+                      
+                          <div class="row mb-4">
+                            <div class="col">
+                              <input type="password" class="form-control" id="exampleInputPassword1" name="senha" placeholder="Senha">
+                            </div>
+                            <div class="col">
+                              <input type="password" class="form-control" id="exampleInputPassword2" name="confirmar_senha"
+                                placeholder="Digite a senha novamente">
+                            </div>
+                          </div>
+                      
+                          <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4">Resgistrar</button>
+                      
+                        </form>  
+                        <p class="mb-0">Ja possui uma conta? <a href="{% url 'login' %}"
+                          class="text-white-50 fw-bold">Logar</a>
+                        </p>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+</section>
 
 
-  <script>
-    // Função para formatar o número de telefone
-    function formatarTelefone(telefone) {
-      // Verifica se o número tem pelo menos 10 dígitos
-      if (telefone.length >= 10) {
-        // Formata o número como (xx) xxxxxxxxx
-        return '(' + telefone.substr(0, 2) + ') ' + telefone.substr(2, 5) + '-' + telefone.substr(7);
-      } else {
-        return telefone;
-      }
+
+<script>
+  // Função para formatar o número de telefone
+  function formatarTelefone(telefone) {
+    // Verifica se o número tem pelo menos 10 dígitos
+    if (telefone.length >= 10) {
+      // Formata o número como (xx) xxxxxxxxx
+      return '(' + telefone.substr(0, 2) + ') ' + telefone.substr(2, 5) + '-' + telefone.substr(7);
+    } else {
+      return telefone;
     }
-    
-    // Função para validar e formatar o número de telefone conforme o usuário digita
-    document.getElementById('telefone').addEventListener('input', function(event) {
-      var telefoneInput = event.target;
-      var telefone = telefoneInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-      var telefoneFormatado = formatarTelefone(telefone);
-      
-      telefoneInput.value = telefoneFormatado;
-    });
+  }
 
-    //CEP
-    document.getElementById('cep').addEventListener('change', function(event) {
-      var cep = event.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-      if (cep.length === 8) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://viacep.com.br/ws/' + cep + '/json/');
-        xhr.onload = function() {
-          if (xhr.status === 200) {
-            var endereco = JSON.parse(xhr.responseText);
-            document.getElementById('rua').value = endereco.logradouro || '';
-            document.getElementById('cidade').value = endereco.localidade || '';
-            document.getElementById('estado').value = endereco.uf || '';
-          } else {
-            console.log('Erro ao obter dados do CEP: ' + xhr.status);
-          }
-        };
-        xhr.send();
-      }
-    });
-  </script>
+  // Função para validar e formatar o número de telefone conforme o usuário digita
+  document.getElementById('telefone').addEventListener('input', function (event) {
+    var telefoneInput = event.target;
+    var telefone = telefoneInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    var telefoneFormatado = formatarTelefone(telefone);
+
+    telefoneInput.value = telefoneFormatado;
+  });
+
+  //CEP
+  document.getElementById('cep').addEventListener('change', function (event) {
+    var cep = event.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    if (cep.length === 8) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://viacep.com.br/ws/' + cep + '/json/');
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          var endereco = JSON.parse(xhr.responseText);
+          document.getElementById('rua').value = endereco.logradouro || '';
+          document.getElementById('cidade').value = endereco.localidade || '';
+          document.getElementById('estado').value = endereco.uf || '';
+        } else {
+          console.log('Erro ao obter dados do CEP: ' + xhr.status);
+        }
+      };
+      xhr.send();
+    }
+  });
+</script>
 {% endblock %}
