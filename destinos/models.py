@@ -12,15 +12,19 @@ class LugarTuristico(models.Model):
     nota = models.DecimalField(max_digits=2, decimal_places=1, null=True, default=0)
     
     comentarios = models.ManyToManyField('Comentario', blank=True)
+    
+    def __str__(self):
+        return self.nome
 
 
 class Comentario(models.Model):
     texto = models.CharField(max_length=255)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     data_criacao = models.DateTimeField(auto_now_add=True, null=False)
-    destinoA = models.IntegerField(blank=True, null=True)
+    destino = models.ForeignKey(LugarTuristico, on_delete=models.CASCADE, related_name='comentarios_destinos', blank=True, null=True) 
+
+    
     rating = models.IntegerField(default=0,null=True)
     
     def __str__(self):
         return self.texto
-

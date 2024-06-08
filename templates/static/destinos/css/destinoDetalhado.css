@@ -44,8 +44,8 @@
         color: #E1E6F6;
         cursor: pointer;
         display: inline-flex;
-        font-size: 2.6rem; /* Tamanho da fonte das estrelas */
-        padding: 0.5rem 0.3rem; /* Reduz o padding para ajustar ao novo tamanho */
+        font-size: 2.6rem; 
+        padding: 0.5rem 0.3rem; 
         transition: color 0.5s;
     }
 

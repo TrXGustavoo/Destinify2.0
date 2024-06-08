@@ -7,6 +7,7 @@ class ComentarioForm(ModelForm):
         model = Comentario
         fields = ['texto', 'rating']
         
+        
 class LugarTuristicoForm(forms.ModelForm):
     class Meta:
         model = LugarTuristico

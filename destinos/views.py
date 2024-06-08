@@ -1,9 +1,7 @@
-from django.shortcuts import render
-from .models import LugarTuristico
+
+from .models import LugarTuristico, Comentario
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Comentario
-from .forms import ComentarioForm, LugarTuristicoForm
-from django.db.models import Avg
+from .forms import LugarTuristicoForm, ComentarioForm
 from django.contrib.auth.models import User
 from main.models import Profile
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -11,27 +9,19 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 @login_required
 def destinos(request):
-    # Obter parâmetros da requisição
-    pais = request.GET.get("pais", "")
-    cidade = request.GET.get("cidade", "")
-    nome = request.GET.get("nome", "")
-    ordenar_por_nota = request.GET.get("ordenar_por_nota", False)
+    filters = {}
+    for field in ["pais", "cidade", "nome"]:
+        value = request.GET.get(field)
+        if value:
+            filters[f"{field}__icontains"] = value
 
-    # Filtrar destinos
-    destinos = LugarTuristico.objects.all()
-    if pais:
-        destinos = destinos.filter(pais__icontains=pais)
-    elif cidade:
-        destinos = destinos.filter(cidade__icontains=cidade)
-    elif nome:
-        destinos = destinos.filter(nome__icontains=nome)
-    # Ordenar por nota
-    elif ordenar_por_nota:
-        destinos = destinos.order_by("-nota")
-    elif request.GET.get("resetar"):
-        return render(request, "destinos.html", {"destinos": destinos})
+    if request.GET.get("ordenar_por_nota"):
+        destinos = LugarTuristico.objects.filter(**filters).order_by("-nota")
+    else:
+        destinos = LugarTuristico.objects.filter(**filters)
 
     return render(request, "destinos.html", {"destinos": destinos})
+
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -52,7 +42,7 @@ def destino_create(request):
 @login_required
 def destino_detalhe(request, destino_id):
     destino = get_object_or_404(LugarTuristico, pk=destino_id)
-    comentarios = Comentario.objects.filter(destinoA=destino_id).order_by(
+    comentarios = Comentario.objects.filter(destino=destino_id).order_by(
         "-data_criacao"
     )
 
@@ -67,9 +57,6 @@ def destino_detalhe(request, destino_id):
 
     profile = get_object_or_404(User, username=request.user.username)
     fotos_perfil = Profile.objects.filter(user=profile)
-    print(profile)
-    usuario = User
-    print(usuario)
 
     return render(
         request,
@@ -77,21 +64,20 @@ def destino_detalhe(request, destino_id):
         {"destino": destino, "comentarios": comentarios, "fotos_perfil": fotos_perfil},
     )
 
+
 @login_required
 def destino_comentario_create(request, destino_id):
     destino = get_object_or_404(LugarTuristico, pk=destino_id)
+
     if request.method == "POST":
-        texto = request.POST.get("comentario_texto")
-        rating = request.POST.get("star-rating")
-        comentario = Comentario(
-            texto=texto, usuario=request.user, destinoA=destino_id, rating=rating
-        )
-        comentario.save()
-        return redirect("destino_detalhe", destino.id)
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            comentario = form.save(commit=False)
+            comentario.usuario = request.user
+            comentario.destino = destino
+            comentario.save()
+            return redirect("destino_detalhe", destino.id)
     else:
         form = ComentarioForm()
-    foto_destino = destino
 
-    return render(
-        request, "destino_comentario_create.html", {"destino": destino, "form": form}
-    )
+    return render(request, "destino_comentario_create.html", {"destino": destino, "form": form})
