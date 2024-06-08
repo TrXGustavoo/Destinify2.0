@@ -30,14 +30,24 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="card mb-4">
-                    <h2 class="card-title">{{ destino.nome }}</h2>
-                    <div class="card-body">
-                        <p class="card-text"><strong>{{ destino.descricao }}</strong></p>
+                <br>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Descrição</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Comentarios</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                        <br>
+                        <strong>{{ destino.descricao }}</strong>
                     </div>
-                </div>
-            </div>
-        </div>
+                    <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+
+
                         <div class="parent">
                             <div class="div1"> 
                                 <section class="w-100">
@@ -203,8 +213,29 @@
                                     </section>
                                 </form>
                             </div>
+                            <div class="div3"> </div>
                         </div>
+
+                    
                     </div>
                 </div>
+                
+            </div>
+        </div>
     </div>
+
+    <script>
+        const abas = document.querySelectorAll(".aba");
+        const conteudos = document.querySelectorAll(".conteudo");
+
+        abas.forEach((aba)=>{
+            aba.addEventListener("click", ()=>{
+                abas.forEach((aba)=> aba.classList.remove('ativa'));
+                aba.classList.add("ativa")
+
+                conteudos.forEach((conteudo)=> conteudo.style.display = "none");
+                document.querySelector(´#${aba.id.replace("aba","conteudo")}).style.display = "block";
+            });    
+        });
+    </script>
 {% endblock 'conteudo' %}
