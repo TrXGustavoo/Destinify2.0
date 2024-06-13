@@ -11,6 +11,13 @@
 
 <section class="vh-100 gradient-custom">
   <div class="container">
+    {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+              <li class="alert {{ message.tags }}">{{ message }}</li> 
+          {% endfor %}
+      </ul>
+  {% endif %}
   </div>
   <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -39,14 +46,14 @@
                       
                           <div class="row mb-4">
                       
-                            <div class="col"><input class="form-control" type="text" id="rua" name="rua" required placeholder="Rua"></div>
+                            <div class="col"><input class="form-control" type="text" id="rua" name="rua"  placeholder="Rua"></div>
                       
                             <div class="col">
-                              <input type="text" class="form-control" id="cidade" name="cidade" required placeholder="Cidade">
+                              <input type="text" class="form-control" id="cidade" name="cidade"  placeholder="Cidade">
                             </div>
                       
                             <div class="col">
-                              <select id="estado" name="estado" required class="form-control">
+                              <select id="estado" name="estado"  class="form-control">
                                 <option value="">Selecione o estado</option>
                                 <option value="AC">Acre</option>
                                 <option value="AL">Alagoas</option>
@@ -80,7 +87,7 @@
                       
                             <div class="col">
                               <input type="text" id="cep" class="form-control" name="cep" pattern="[0-9]{5}-[0-9]{3}"
-                                title="Digite o CEP no formato 99999-999" required placeholder="CEP">
+                                title="Digite o CEP no formato 99999-999"  placeholder="CEP">
                             </div>
                           </div>
                       
@@ -123,44 +130,43 @@
 
 
 <script>
-  // Função para formatar o número de telefone
+  
   function formatarTelefone(telefone) {
-    // Verifica se o número tem pelo menos 10 dígitos
+    
     if (telefone.length >= 10) {
-      // Formata o número como (xx) xxxxxxxxx
+      
       return '(' + telefone.substr(0, 2) + ') ' + telefone.substr(2, 5) + '-' + telefone.substr(7);
     } else {
       return telefone;
     }
   }
 
-  // Função para validar e formatar o número de telefone conforme o usuário digita
   document.getElementById('telefone').addEventListener('input', function (event) {
-    var telefoneInput = event.target;
-    var telefone = telefoneInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-    var telefoneFormatado = formatarTelefone(telefone);
+    var telefoneInput = event.target
+    var telefone = telefoneInput.value.replace(/\D/g, '')
+    var telefoneFormatado = formatarTelefone(telefone)
 
-    telefoneInput.value = telefoneFormatado;
-  });
+    telefoneInput.value = telefoneFormatado
+  })
 
   //CEP
   document.getElementById('cep').addEventListener('change', function (event) {
-    var cep = event.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    var cep = event.target.value.replace(/\D/g, '')
     if (cep.length === 8) {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', 'https://viacep.com.br/ws/' + cep + '/json/');
       xhr.onload = function () {
         if (xhr.status === 200) {
           var endereco = JSON.parse(xhr.responseText);
-          document.getElementById('rua').value = endereco.logradouro || '';
-          document.getElementById('cidade').value = endereco.localidade || '';
-          document.getElementById('estado').value = endereco.uf || '';
+          document.getElementById('rua').value = endereco.logradouro || ''
+          document.getElementById('cidade').value = endereco.localidade || ''
+          document.getElementById('estado').value = endereco.uf || ''
         } else {
-          console.log('Erro ao obter dados do CEP: ' + xhr.status);
+          console.log('Erro ao obter dados do CEP: ' + xhr.status)
         }
-      };
-      xhr.send();
+      }
+      xhr.send()
     }
-  });
+  })
 </script>
 {% endblock %}
