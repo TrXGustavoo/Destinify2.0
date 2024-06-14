@@ -32,6 +32,10 @@
     height: auto;
 }
 
+.rating-media {
+    display: inline-block;
+}
+
 .rating-wrapper {
     align-self: center;
     border-radius: 5rem;

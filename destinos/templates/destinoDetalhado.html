@@ -8,13 +8,6 @@
     <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
 
-    <style>
-        .rating li {
-            display: inline-block;
-        }
-    </style>
-
-
 {% endblock 'cabecalho' %}
 
 {% block 'conteudo' %}
@@ -41,7 +34,7 @@
                         <div class="parent">
                             <div class="div1"> 
                                 <section class="w-100">
-                                    <br><strong>Comentários:</strong> {{comentarios.count}}
+                                    <br><strong>Total de Comentários:</strong> {{comentarios.count}}
                                     {% if comentarios %}
                                         {% for comentario in comentarios %}
                                             <div class="container my-5 py-5 text-dark ">
@@ -123,7 +116,13 @@
                                 
                             </div>
                             <div class="div2"> 
-                                <br><strong>Nota media:</strong> {{ destino.nota }}<br>
+                                <br><strong>Nota media:</strong> 
+                                <div class="rating-media">
+                                    {% for i in 'xxxxx' %}
+                                        <i class="fa fa-star rating-color{% if forloop.counter > destino.nota %}-o{% endif %}"></i>
+                                    {% endfor %}
+                                </div>
+                                <br>
                                 <form action="{% url 'destino_comentario_create' destino.id %}" method="POST"> {%      csrf_token %}
                                     <section>
                                         <div class="container my-5 py-5 text-dark">

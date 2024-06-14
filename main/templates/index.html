@@ -5,5 +5,41 @@
 {% endblock 'cabecalho' %}
 
 {% block 'conteudo' %}
-    
+<main>
+    <section id="hero" class="jumbotron text-center">
+        <h2 class="display-4">Descubra Seu Próximo Destino</h2>
+        <p class="lead">Explore lugares incríveis, compartilhe suas experiências e inspire outros viajantes.</p>
+    </section>
+
+    <section id="features" class="container">
+        <h2 class="text-center my-5">Por que escolher o TravelBuddy?</h2>
+        <div class="row">
+            <div class="col-md-4 feature">
+                <i class="fas fa-search fa-3x mb-3"></i>
+                <h3>Encontre Destinos Incríveis</h3>
+                <p>Explore nossa vasta coleção de destinos e encontre o lugar perfeito para sua próxima aventura.</p>
+            </div>
+            <div class="col-md-4 feature">
+                <i class="fas fa-comments fa-3x mb-3"></i>
+                <h3>Compartilhe Suas Experiências</h3>
+                <p>Conte suas histórias, compartilhe fotos e dicas, e inspire outros viajantes com suas aventuras.</p>
+            </div>
+            <div class="col-md-4 feature">
+                <i class="fas fa-star fa-3x mb-3"></i>
+                <h3>Avalie e Recomenda Destinos</h3>
+                <p>Deixe sua opinião sobre os lugares que você visitou e ajude outros viajantes a escolherem seus destinos.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="call-to-action" class="bg-light py-5">
+        <div class="container text-center">
+            <h2>Pronto para Explorar?</h2>
+            <p>Junte-se à nossa comunidade de viajantes e comece a planejar sua próxima viagem!</p>
+            {% if not user.is_authenticated %}
+                <a href="{% url 'cadastro' %}" class="btn btn-primary btn-lg">Cadastre-se Agora</a>
+            {% endif %}
+        </div>
+    </section>
+</main>
 {% endblock 'conteudo' %}
