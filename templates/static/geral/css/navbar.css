@@ -2,12 +2,7 @@
 	background-color: #001F3F !important;
 }
 #navT a {
-	color: #FF851B;
-}
-
-#menu-logo {
-	border: 2px solid red;
-
+	color: #fff;
 }
 
 #menu {
@@ -46,7 +41,7 @@
 	line-height: 76px;
 	padding: 0 14px;
 	text-decoration: none;
-	color: #FF851B;
+	color: #fff;
 	font-size: 22px;
 }
 
@@ -76,7 +71,7 @@
 }
 #menu label:before {
 	font-size: 1.6em;
-	color: #FF851B;
+	color: #fff;
 	content: "\2261"; 
 	margin-left: 20px;
 }
@@ -95,7 +90,7 @@
 	width: 100%;
 }
 #menu ul.sub-menus a {
-	color: #FF851B;
+	color: #fff;
 	font-size: 18px;
 }
 #menu li:hover ul.sub-menus {
@@ -113,7 +108,7 @@
 	#menu li {display:block;float:none;width:auto;}
 	#menu input, #menu label {position:absolute;top:0;left:0;display:block}
 	#menu input {z-index:4}
-	#menu input:checked + label {color:#FF851B}
+	#menu input:checked + label {color: #fff;}
 	#menu input:checked + label:before {content:"\00d7"}
 	#menu input:checked ~ ul {display:block}
 }

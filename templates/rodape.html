@@ -9,9 +9,33 @@
     <link rel="stylesheet" href="{% static 'geral/css/rodape.css' %}" />
   </head>
   <body>
-    <footer class='rodape'>
-        
-    </footer>
+    <footer class="text-white py-4">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-4">
+                  <h5>Destinify</h5>
+                  <p>Explore o mundo com a gente!</p>
+              </div>
+              <div class="col-md-4">
+                  <h5>Links Úteis</h5>
+                  <ul class="list-unstyled">
+                      <li><a href="{% url 'home' %}">Home</a></li>
+                      <li><a href="{% url 'destinos' %}">Destinos</a></li>
+                  </ul>
+              </div>
+              <div class="col-md-4">
+                  <h5>Contato</h5>
+                  <p>Email: contato@destinify.com</p>
+                  <p>Telefone: (11) 1234-5678</p>
+              </div>
+          </div>
+          <div class="row mt-3">
+              <div class="col-md-12 text-center">
+                  <p>&copy; 2023 Destinify. Todos os direitos reservados.</p>
+              </div>
+          </div>
+      </div>
+  </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

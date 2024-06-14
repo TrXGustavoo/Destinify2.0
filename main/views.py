@@ -5,6 +5,7 @@ from django.contrib.messages import constants
 from django.contrib import messages, auth
 from destinos.models import Comentario
 from .models import *
+from destinos.models import LugarTuristico
 from django.shortcuts import get_object_or_404
 from .forms import ProfileForm
 from django.contrib.auth.decorators import login_required
@@ -12,6 +13,11 @@ from django.contrib.auth.decorators import login_required
 
 class HomeView(TemplateView):
     template_name = "index.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['destinos'] = LugarTuristico.objects.all()  # Ou filtre os destinos que você quer exibir
+        return context
 
 
 def cadastro(request):

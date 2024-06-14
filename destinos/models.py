@@ -10,6 +10,7 @@ class LugarTuristico(models.Model):
     foto = models.ImageField(upload_to="lugares/", blank=True, null=True)
     descricao = models.TextField()
     nota = models.DecimalField(max_digits=2, decimal_places=1, null=True, default=0)
+    url_foto = models.CharField(max_length=500, blank=True, null=True)
     
     comentarios = models.ManyToManyField('Comentario', blank=True)
     

@@ -5,6 +5,8 @@
 
 {% block 'cabecalho' %}
     <link rel="stylesheet" href="{% static 'destinos/css/destinos.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
 {% endblock 'cabecalho' %}
 
 {% block 'conteudo' %}
@@ -31,11 +33,19 @@
             {% for destino in destinos %}
             <div class="col-md-4">
                 <div class="card">
-                    <img class="card-img-top" src="{{destino.foto.url}}" alt="{{ destino.nome }}">
+                    <img class="card-img-top" src="{{destino.url_foto}}" alt="{{ destino.nome }}">
                     <div class="card-body">
                         <h2 class="card-title">{{ destino.nome }}</h2>
-                        <p class="card-text">{{ destino.descricao }}</p>
-                        
+                        <div class="card-text">
+                            <p>{{ destino.descricao }}</p>
+                        </div>
+                        <br><strong>Nota media:</strong> 
+                        <div class="rating-media">
+                            {% for i in 'xxxxx' %}
+                                <i class="fa fa-star rating-color{% if forloop.counter > destino.nota %}-o{% endif %}"></i>
+                            {% endfor %}
+                        </div>
+                        <br>
                         <a href="{% url 'destino_detalhe' destino.id %}" class="btn btn-primary">Ver Mais</a>
                     </div>
                 </div>

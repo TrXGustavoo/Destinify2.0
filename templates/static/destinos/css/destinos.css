@@ -1,4 +1,17 @@
-/* Estilo geral */
+
+.rating-media {
+    display: inline-block;
+}
+
+.ratings i{
+    
+    color:#cecece;
+    font-size:32px;
+}
+
+.rating-color{
+    color:#fbc634 !important;
+}
 
 body {
     font-family: sans-serif;
@@ -25,7 +38,6 @@ a:hover {
     color: #337ab7;
 }
 
-/* Estilo dos cards */
 
 .card {
     margin-bottom: 20px;
@@ -40,7 +52,8 @@ a:hover {
 }
 
 .card-body {
-    padding: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
 .card-img-top {
@@ -48,7 +61,6 @@ a:hover {
     object-fit: cover;
 }
 
-/* Estilo do container */
 
 .container {
     max-width: 960px;
@@ -56,7 +68,6 @@ a:hover {
     padding: 20px;
 }
 
-/* Estilo do footer */
 
 .footer {
     background-color: #337ab7;
@@ -65,14 +76,19 @@ a:hover {
     text-align: center;
 }
 
-/* Estilo personalizado */
 
 .card-title {
     color: #337ab7;
 }
 
 .card-text {
-    color: #666;
+    flex-grow: 1; /* Permite que a descrição ocupe o espaço disponível */
+    max-height: 150px; /* Altura máxima da descrição */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Número máximo de linhas visíveis */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis
 }
 
 .btn-primary {

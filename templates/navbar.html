@@ -20,7 +20,7 @@
       {% if user.is_superuser %}
         <li><a  href="{% url 'destino_create' %}">Criar</a></li>
       {% endif %}
-      <li><a href="{% url 'sobre' %}">Sobre nós</a></li>
+      {% comment %} <li><a href="{% url 'sobre' %}">Sobre nós</a></li> {% endcomment %}
       <li class="right-aligned"> 
         {% if not user.is_authenticated %}
             <a href="{% url 'cadastro' %}">Registrar</a>

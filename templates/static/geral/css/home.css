@@ -1,0 +1,7 @@
+.feature p {
+    visibility: hidden; /* Esconde os parágrafos inicialmente */
+}
+
+.feature:hover p {
+    visibility: visible; /* Exibe os parágrafos quando o mouse passa sobre o elemento pai */
+}

@@ -1,8 +1,12 @@
+
 footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-    /* Opcional, caso o conteúdo principal sobreponha o rodapé */
+    background-color: #001F3F; /* Nova cor de fundo */
+}
+
+footer a {
+    color: #fff; /* Cor do link em branco */
+}
+
+footer a:hover {
+    color: #ccc; /* Cor do link ao passar o mouse */
 }

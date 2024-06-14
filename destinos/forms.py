@@ -11,5 +11,5 @@ class ComentarioForm(ModelForm):
 class LugarTuristicoForm(forms.ModelForm):
     class Meta:
         model = LugarTuristico
-        fields = ['nome','pais','estado','cidade','foto','descricao']
+        fields = ['nome','pais','estado','cidade','url_foto','descricao']
     
